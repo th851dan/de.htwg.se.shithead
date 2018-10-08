@@ -1,2 +1,2 @@
-# htwg.se.shithead
+# de.htwg.se.shithead
 Software Engineering Project
