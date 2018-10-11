@@ -3,10 +3,12 @@ package de.htwg.se.shithead.model
 import scala.util.Random
 
 object CardStack {
+
     val suites = Set(Spade, Heart, Club, Diamond)
     val ranks = List(Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace)
 
     class Stack(cardStack: List[Card] = for (r <- ranks; s <- suites) yield Card(r, s)) {
+        
         val cards = if (isValidStack(cardStack)) cardStack
         else throw new RuntimeException("Stack is invalid!")
 
