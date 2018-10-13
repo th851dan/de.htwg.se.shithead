@@ -4,35 +4,27 @@ import scala.util.Random
 
 object CardStack {
 
+    case class Stack(cards: List[Card]) {
+
+        var cardStack = if (isValidStack(cards)) cards else throw new RuntimeException("Stack is invalid")
+        
+        def shuffle(): Stack = new Stack(Random.shuffle(cardStack))
+
+        def pullFromTop(): (Card, Stack) = (cardStack.head, new Stack(cardStack.tail))
+
+        def addToTop(card: Card): Stack = new Stack(card :: cardStack)
+
+        def addToTop(cardsToAdd: List[Card]): Stack = new Stack(cardsToAdd ::: cardStack)
+
+        private def isValidStack(cards: List[Card]): Boolean = cards.size <= 52 && cards.distinct.size == cards.size
+    }
+
     val suites = Set(Spade, Heart, Club, Diamond)
     val ranks = List(Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace)
 
-    case class Stack(cardStack: List[Card] = for (r <- ranks; s <- suites) yield Card(r, s)) {
-        
-        var cards = if (isValidStack(cardStack)) cardStack
-                    else throw new RuntimeException("Stack is invalid!")
+    val cards: List[Card] = for(r <- ranks; s <- suites) yield Card(r, s)
 
-        def shuffle() = new Stack(Random.shuffle(cards))
+    var cardStack = new Stack(cards)
 
-        def pullFromTop(): List[Card] = {
-            val cardsHead = cards.head
-            val cardTail = cards.tail
-
-            cards = if (isValidStack(cardTail)) cardTail
-                    else throw new RuntimeException("Stack is invalid!")
-            List(cardsHead)
-        }
-
-        def addToTop(cardsToAdd: List[Card]) = new Stack(cardsToAdd ::: cards)
-
-        private def isValidStack(cards: List[Card]) = cards.size <= 52 && cards.distinct.size == cards.size
-    }
-
-    var stack = new Stack
-
-    def apply() = stack.shuffle
-
-    def pullFromTop() = stack.pullFromTop
-
-    def addToTop(cardsToAdd: List[Card]) = stack.addToTop(cardsToAdd)
+    def apply() = cardStack.shuffle
 }

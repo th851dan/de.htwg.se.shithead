@@ -11,19 +11,23 @@ object Shithead {
 
         var stack = CardStack()
 
-        var card = stack.pullFromTop
+        stack.cardStack.toStream.foreach(x => println(x))
 
-        println("Card pulled from top of Stack: " + card)
+        val tuple = stack.pullFromTop
 
-        println("\nStack:")
-        
-        stack.cards.toStream.foreach(x => println(x))
+        stack = tuple._2
+        var card = tuple._1
 
-        println("\nAdding Card to top of Stack!")
+        println("\nCard pulled from top of Stack: " + card)
+
+        stack.cardStack.toStream.foreach(x => println(x))
 
         stack = stack.addToTop(card)
 
-        stack.cards.toStream.foreach(x => println(x))
+        println("\nCard added to top of Stack: " + card)
+        
+        stack.cardStack.toStream.foreach(x => println(x))
+
 
         var input: String = ""
         /*do {
