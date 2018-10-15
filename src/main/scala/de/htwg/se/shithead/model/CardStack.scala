@@ -4,9 +4,14 @@ import scala.util.Random
 
 object CardStack {
 
+    val suites = Set(Spade, Heart, Club, Diamond)
+    val ranks = List(Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace)
+    val cards: List[Card] = for(r <- ranks; s <- suites) yield Card(r, s)
+    val cardStack = new Stack(cards)
+
     case class Stack(cards: List[Card]) {
 
-        var cardStack = if (isValidStack(cards)) cards else throw new RuntimeException("Stack is invalid")
+        val cardStack = if (isValidStack(cards)) cards else throw new RuntimeException("Stack is invalid")
         
         def shuffle(): Stack = new Stack(Random.shuffle(cardStack))
 
@@ -18,13 +23,6 @@ object CardStack {
 
         private def isValidStack(cards: List[Card]): Boolean = cards.size <= 52 && cards.distinct.size == cards.size
     }
-
-    val suites = Set(Spade, Heart, Club, Diamond)
-    val ranks = List(Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace)
-
-    val cards: List[Card] = for(r <- ranks; s <- suites) yield Card(r, s)
-
-    var cardStack = new Stack(cards)
 
     def apply() = cardStack.shuffle
 }
