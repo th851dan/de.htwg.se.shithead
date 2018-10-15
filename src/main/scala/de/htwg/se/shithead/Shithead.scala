@@ -28,6 +28,11 @@ object Shithead {
         var userList: List[User] = List()
         userList = new User("Marius") :: userList
         userList = new User("Julius") :: userList
+
+        var userList2: List[User] = List(new User("Adam"), new User("Berta"), new User("Christian"))
+
+        userList = userList2 ::: userList
+
         println("\nUserList: " + userList)
         println("UUID: " + userList(0).UUID + " Name: " + userList(0).NAME)
         println("UUID: " + userList(1).UUID + " Name: " + userList(1).NAME)
