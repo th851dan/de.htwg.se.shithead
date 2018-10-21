@@ -24,5 +24,5 @@ object CardStack {
         private def isValidStack(cards: List[Card]): Boolean = cards.size <= 52 && cards.distinct.size == cards.size
     }
 
-    def apply() = cardStack.shuffle
+    def shuffle() = cardStack.shuffle
 }
