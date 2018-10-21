@@ -6,7 +6,7 @@ object CardStack {
 
     val suites = Set(Spade, Heart, Club, Diamond)
     val ranks = List(Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace)
-    val cards: List[Card] = for(r <- ranks; s <- suites; v <- false) yield Card(r, s, v)
+    val cards: List[Card] = for(r <- ranks; s <- suites) yield Card(r, s, false)
     val cardStack = new Stack(cards)
 
     case class Stack(cards: List[Card]) {
