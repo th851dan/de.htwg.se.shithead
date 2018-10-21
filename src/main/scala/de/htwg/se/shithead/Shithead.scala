@@ -10,14 +10,13 @@ object Shithead {
     def main(args: Array[String]) {
         println("This is Shithead!")
 
-// !new CardStack and basic overview of functions
         var stack = CardStack()
-        stack.cardStack.toStream.foreach(x => println(x))
+        var userList: List[User] = List()
 
-        /*var input: String = ""
+        var input: String = ""
         do {
             input = readLine
             // Todo: Controller processes input!
-        } while(input != "q")*/
+        } while(input != "q")
     }
 }
