@@ -9,7 +9,7 @@ object Controller {
         var line2 = line.toLowerCase()
         if(matches(line2)) {
             line replaceFirst("^ *", "")
-            val splitted = line2^ split("\\s+")
+            val splitted = line2 split("\\s+")
             splitted(0) match {
                 case "y" => println(answerYes())
                 case "n" => println(answerNo())
@@ -39,7 +39,7 @@ object Controller {
 
     def answerNo(): String = {
         if (zustand == 2) {
-            "hallo"
+            "bla"
         } else {
             "Dieses Kommando ist nicht möglich"
         } 
