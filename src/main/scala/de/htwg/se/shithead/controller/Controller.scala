@@ -18,10 +18,11 @@ object Controller {
                 case "y" => println(answerYes())
                 case "n" => println(answerNo())
                 case "start" => println(startGame())
-                case "new" => println(newUser(splitted(2)))
+                case "add" => println(newUser(splitted(2)))
                 case "play" => println(playCard(splitted(1) toInt))
                 case "switch" => println(switchCards(splitted(1) toInt, splitted(2) toInt))
-                case "remove" => println(removeUser(splitted(1)))
+                case "remove" => println(removeUser(splitted(2)))
+                case "q" => println("Adios Amigos\n")
 
             }
         } else {
@@ -30,9 +31,9 @@ object Controller {
 
     }
 
-    def matches(line : String): Boolean = line.matches("((\\s)*y(\\s)*)|((\\s)*n(\\s)*)|((\\s)*(new)(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|" +
+    def matches(line : String): Boolean = line.matches("((\\s)*y(\\s)*)|((\\s)*n(\\s)*)|((\\s)*(add)(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|" +
         "((\\s)*start(\\s)*)|((\\s)*(switch)(\\s)+[123](\\s)+[123](\\s)*)|" +
-        "((\\s)*play(\\s)+(\\d)+(\\s)*)|((\\s)*remove(\\s)+(\\w){2,20}")
+        "((\\s)*play(\\s)+(\\d)+(\\s)*)|((\\s)*remove(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|((\\s)*q(\\s)*)")
 
     def answerYes(): String = {
         if (zustand == 3) {
