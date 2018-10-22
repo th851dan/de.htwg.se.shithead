@@ -13,10 +13,9 @@ object Controller {
     var zustand: Int = 0
 
     def eval(line : String) {
-        var line2 = line.toLowerCase()
-        if(matches(line2)) {
+        if(matches(line)) {
             line replaceFirst("^ *", "")
-            val splitted = line2 split("\\s+")
+            val splitted = line split("\\s+")
             splitted(0) match {
                 case "y" => println(answerYes())
                 case "n" => println(answerNo())
@@ -34,9 +33,12 @@ object Controller {
 
     }
 
-    def matches(line : String): Boolean = line.matches("((\\s)*y(\\s)*)|((\\s)*n(\\s)*)|((\\s)*(add)(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|" +
-        "((\\s)*start(\\s)*)|((\\s)*(switch)(\\s)+[123](\\s)+[123](\\s)*)|" +
+    def matches(line : String): Boolean = {
+        var line2 = line.toLowerCase
+        line2.matches("((\\s)*y(\\s)*)|((\\s)*n(\\s)*)|((\\s)*(add)(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|" +
+        "((\\s)*start(\\s)+game(\\s)*)|((\\s)*(switch)(\\s)+[123](\\s)+[123](\\s)*)|" +
         "((\\s)*play(\\s)+(\\d)+(\\s)*)|((\\s)*remove(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|((\\s)*q(\\s)*)")
+    }
 
     def answerYes(): String = {
         if (zustand == 3) {
@@ -60,7 +62,7 @@ object Controller {
                 if (UserList addUser(name))
                     "New user added: " + name + "\n"
                 else
-                    "It exists  user with the same name\n"
+                    "There is someone with the same name\n"
             } else {
                 "Too many users (delete user with: remove name)\n"
             }
@@ -113,21 +115,24 @@ object Controller {
     }
 
     def start() = {
+        println("hans")
         for (u <- UserList.userList) {
             var i = 0
+            
             for (i <- 1 to 6) {
-                val card = CardStack.cardStack.pullFromTop._1
+                var card = CardStack.cardStack.pullFromTop._1
                 card.visibility = true
                 u.addHand(card)
+                println(u.toString + " " + card)
             }
             for (i <- 1 to 3) u.addTable(CardStack.cardStack.pullFromTop._1)
             for (i <- 1 to 3) {
-                val card = CardStack.cardStack.pullFromTop._1
+                var card = CardStack.cardStack.pullFromTop._1
                 card.visibility = true
                 u.addTable(card)
             }
         }
-        Tui.update
+        var User = ()
+        for(user <- UserList.userList) Tui.show(user)
     }
-
 }
