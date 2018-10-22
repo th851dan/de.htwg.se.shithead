@@ -5,6 +5,7 @@ import de.htwg.se.shithead.model.UserList
 import de.htwg.se.shithead.Shithead
 import de.htwg.se.shithead.model.CardStack
 import de.htwg.se.shithead.model.Card
+import de.htwg.se.shithead.view.Tui
 
 object Controller {
     //zustand 
@@ -115,18 +116,18 @@ object Controller {
         for (u <- UserList.userList) {
             var i = 0
             for (i <- 1 to 6) {
-                val card = Shithead.stack.pullFromTop._1
+                val card = CardStack.cardStack.pullFromTop._1
                 card.visibility = true
                 u.addHand(card)
             }
-            for (i <- 1 to 3) u.addTable(Shithead.stack.pullFromTop()._1)
+            for (i <- 1 to 3) u.addTable(CardStack.cardStack.pullFromTop._1)
             for (i <- 1 to 3) {
-                val card = Shithead.stack pullFromTop()._1
+                val card = CardStack.cardStack.pullFromTop._1
                 card.visibility = true
                 u.addTable(card)
             }
-            
         }
+        Tui.update
     }
 
 }
