@@ -1,8 +1,7 @@
 package de.htwg.se.shithead.controller
 
 import de.htwg.se.shithead.model.User
-import de.htwg.se.shithead.Shithead
-import de.htwg.se.shithead.
+import de.htwg.se.shithead.model.UserList
 
 
 object Controller {
@@ -22,7 +21,7 @@ object Controller {
                 case "new" => println(newUser(splitted(2)))
                 case "play" => println(playCard(splitted(1) toInt))
                 case "switch" => println(switchCards(splitted(1) toInt, splitted(2) toInt))
-                case "remove" => println(removeUser())
+                case "remove" => println(removeUser(splitted(1)))
 
             }
         } else {
@@ -53,21 +52,28 @@ object Controller {
     
     def newUser(name : String): String = {
         if (zustand == 0) {
-            if (Shithead userlist length  < 6) {
-                val bla = new User(name) 
-                bla :: Shithead.userlist
-                "Benutzer wurde angefügt"
+            if (UserList.userList.size  < 6) {
+                if (UserList addUser(name))
+                    "new User " + name + "\n"
+                else
+                    "It exists  user with the same name"
             } else {
-                "Es sind bereits zuviele Benutzer (löschen mit: remove name)"
+                "Too many users (delete user with: remove name)\n"
             }
         } else {
-            "Opeartion not available"
+            "Opeartion not available\n"
         }
     }
 
     def startGame() {
-        if (zustand == 1) {
-            "hallo"
+        if (zustand == 0) {
+            if (UserList.userList.size < 2) {
+                "You need at least 2 players\n"
+            } else {
+                
+                "Es geht los: \n"
+            }
+
         } else {
             "Opeartion not available"
         }
@@ -92,21 +98,13 @@ object Controller {
     def removeUser(name : String): String = {
         var bool: Boolean = false
         if (zustand == 0) {
-            if (Shithead userlist length != 0) {
-                Shithead userlist foreach {
-                    if (_ equals name) {
-                        bool = true
-
-                    }
-                    if(bool) "User removed\n"
-                    else "Exsistiert nicht\n"
-                }
-            } else {
-                "No exsisting user\n"
-            }
-        } else {
-            "Opeartion not available\n"
-        }
+            if (UserList.userList.size == 0)
+                "No users available\n"
+            else if (UserList removeUser(name))
+                "Success\n"
+            else
+                "This user does not exist\n"
+        } else    "Opeartion not available\n"
     }
 
 }
