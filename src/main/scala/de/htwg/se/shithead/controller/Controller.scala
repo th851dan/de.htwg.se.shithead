@@ -2,8 +2,9 @@ package de.htwg.se.shithead.controller
 
 import de.htwg.se.shithead.model.User
 import de.htwg.se.shithead.model.UserList
-import de.hwtg.se.shithead.model.CardStack
-import de.hwtg.se.shithead.model.Card
+import de.htwg.se.shithead.Shithead
+import de.htwg.se.shithead.model.CardStack
+import de.htwg.se.shithead.model.Card
 
 object Controller {
     //zustand 
@@ -114,13 +115,13 @@ object Controller {
         for (u <- UserList.userList) {
             var i = 0
             for (i <- 1 to 6) {
-                val card = Shithead.CardStack.pullFromTop._1
+                val card = Shithead.stack.pullFromTop._1
                 card.visibility = true
-                u.addHand
+                u.addHand(card)
             }
-            for (i <- 1 to 3) u.addTable(Shithead.CardStack.pullFromTop._1)
+            for (i <- 1 to 3) u.addTable(Shithead.stack.pullFromTop()._1)
             for (i <- 1 to 3) {
-                val card = Shithead.CardStack.pullFromTop._1
+                val card = Shithead.stack pullFromTop()._1
                 card.visibility = true
                 u.addTable(card)
             }
