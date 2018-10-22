@@ -17,6 +17,16 @@ object Shithead {
         stack.shuffle()
         var userList = UserList
 
+        // pullFromTop gibt jetzt nur noch eine Karte zurueck
+
+        var card1 = stack.pullFromTop
+        var card2 = stack.pullFromTop
+        var card3 = stack.pullFromTop
+
+        println(card1)
+        println(card2)
+        println(card3)
+
         var input: String = ""
         do {
             input = readLine

@@ -7,7 +7,7 @@ object CardStack {
     val suites = Set(Spade, Heart, Club, Diamond)
     val ranks = List(Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace)
     val cards: List[Card] = for(r <- ranks; s <- suites) yield Card(r, s, false)
-    val cardStack = new Stack(cards)
+    var cardStack = new Stack(cards)
 
     case class Stack(cards: List[Card]) {
 
@@ -24,5 +24,21 @@ object CardStack {
         private def isValidStack(cards: List[Card]): Boolean = cards.size <= 52 && cards.distinct.size == cards.size
     }
 
-    def shuffle() = cardStack.shuffle
+    def pullFromTop(): Card = {
+        val tuple = cardStack.pullFromTop
+        cardStack = tuple._2
+        tuple._1
+    }
+    
+    def addToTop(card: Card) = {
+        cardStack = cardStack.addToTop(card)
+    }
+
+    def addToTop(cardsToAdd: List[Card]) = {
+        cardStack = cardStack.addToTop(cardsToAdd)
+    }
+
+    def shuffle() = {
+        cardStack = cardStack.shuffle
+    }
 }
