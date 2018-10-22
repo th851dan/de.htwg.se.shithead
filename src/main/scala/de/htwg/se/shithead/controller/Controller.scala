@@ -2,7 +2,8 @@ package de.htwg.se.shithead.controller
 
 import de.htwg.se.shithead.model.User
 import de.htwg.se.shithead.model.UserList
-
+import de.hwtg.se.shithead.model.CardStack
+import de.hwtg.se.shithead.model.Card
 
 object Controller {
     //zustand 
@@ -26,7 +27,7 @@ object Controller {
 
             }
         } else {
-            println("Dieses Kommando gibt es nicht.")
+            println("wrong syntax")
         }
 
     }
@@ -55,9 +56,9 @@ object Controller {
         if (zustand == 0) {
             if (UserList.userList.size  < 6) {
                 if (UserList addUser(name))
-                    "new User " + name + "\n"
+                    "New user added: " + name + "\n"
                 else
-                    "It exists  user with the same name"
+                    "It exists  user with the same name\n"
             } else {
                 "Too many users (delete user with: remove name)\n"
             }
@@ -71,12 +72,13 @@ object Controller {
             if (UserList.userList.size < 2) {
                 "You need at least 2 players\n"
             } else {
-                
-                "Es geht los: \n"
+                zustand = 1
+                "Game starts: \n"
+                start
             }
 
         } else {
-            "Opeartion not available"
+            "Opeartion not available\n"
         }
     }
 
@@ -84,7 +86,7 @@ object Controller {
         if (zustand == 3) {
             "hallo"
         } else {
-            "Opeartion not available"
+            "Opeartion not available\n"
         }
     }
 
@@ -92,7 +94,7 @@ object Controller {
         if (zustand == 4) {
             "hallo"
         } else {
-            "Opeartion not available"
+            "Opeartion not available\n"
         }
     }
 
@@ -106,6 +108,24 @@ object Controller {
             else
                 "This user does not exist\n"
         } else    "Opeartion not available\n"
+    }
+
+    def start() = {
+        for (u <- UserList.userList) {
+            var i = 0
+            for (i <- 1 to 6) {
+                val card = Shithead.CardStack.pullFromTop._1
+                card.visibility = true
+                u.addHand
+            }
+            for (i <- 1 to 3) u.addTable(Shithead.CardStack.pullFromTop._1)
+            for (i <- 1 to 3) {
+                val card = Shithead.CardStack.pullFromTop._1
+                card.visibility = true
+                u.addTable(card)
+            }
+            
+        }
     }
 
 }
