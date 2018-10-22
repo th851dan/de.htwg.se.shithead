@@ -16,19 +16,19 @@ object Controller {
         if(matches(line)) {
             line replaceFirst("^ *", "")
             val splitted = line split("\\s+")
+            splitted(0) = splitted(0).toLowerCase
             splitted(0) match {
                 case "y" => println(answerYes())
                 case "n" => println(answerNo())
-                case "start" => println(startGame())
+                case "start" => startGame()
                 case "add" => println(newUser(splitted(2)))
                 case "play" => println(playCard(splitted(1) toInt))
                 case "switch" => println(switchCards(splitted(1) toInt, splitted(2) toInt))
                 case "remove" => println(removeUser(splitted(2)))
                 case "q" => println("Adios Amigos\n")
-
             }
         } else {
-            println("wrong syntax")
+            println("wrong syntax\n")
         }
 
     }
@@ -71,13 +71,13 @@ object Controller {
         }
     }
 
-    def startGame() {
+    def startGame(){
         if (zustand == 0) {
             if (UserList.userList.size < 2) {
-                "You need at least 2 players\n"
+                println("You need at least 2 players\n")
             } else {
                 zustand = 1
-                "Game starts: \n"
+                println("Game starts: \n")
                 start
             }
 
@@ -115,24 +115,22 @@ object Controller {
     }
 
     def start() = {
-        println("hans")
+
         for (u <- UserList.userList) {
             var i = 0
             
-            for (i <- 1 to 6) {
-                var card = CardStack.cardStack.pullFromTop._1
+            for (i <- 1 to 3) {
+                var card = CardStack.pullFromTop
                 card.visibility = true
                 u.addHand(card)
-                println(u.toString + " " + card)
             }
-            for (i <- 1 to 3) u.addTable(CardStack.cardStack.pullFromTop._1)
+            for (i <- 1 to 3) u.addTable(CardStack.pullFromTop)
             for (i <- 1 to 3) {
-                var card = CardStack.cardStack.pullFromTop._1
+                var card = CardStack.pullFromTop
                 card.visibility = true
                 u.addTable(card)
             }
         }
-        var User = ()
-        for(user <- UserList.userList) Tui.show(user)
+        Tui showAll(true)
     }
 }
