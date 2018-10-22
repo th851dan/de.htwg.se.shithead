@@ -4,7 +4,7 @@ object UserList {
     var userList: List[User] = List()
 
     def addUser(name: String) = {
-        if (addActionIsValid(name)) {
+        if (!isValid(name)) {
             userList = new User(name) :: userList
             true
         } else {
@@ -13,15 +13,13 @@ object UserList {
     }
 
     def removeUser(name: String) = {
-        if (removeActionIsValid(name)) {
-            userList = userList.filter(_.name == name)
+        if (isValid(name)) {
+            userList = userList.filter(_.name != name)
             true
         } else {
             false
         }
     }
 
-    private def removeActionIsValid(name: String) = userList.exists(_.name == name)
-
-    private def addActionIsValid(name: String) = userList.exists(_.name != name)
+    private def isValid(name: String) = userList.exists(_.name == name)
 }
