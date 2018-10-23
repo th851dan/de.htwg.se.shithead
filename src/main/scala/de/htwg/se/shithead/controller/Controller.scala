@@ -12,34 +12,6 @@ object Controller {
 
     var zustand: Int = 0
 
-    def eval(line : String) {
-        if(matches(line)) {
-            line replaceFirst("^ *", "")
-            val splitted = line split("\\s+")
-            splitted(0) = splitted(0).toLowerCase
-            splitted(0) match {
-                case "y" => println(answerYes())
-                case "n" => println(answerNo())
-                case "start" => startGame()
-                case "add" => println(newUser(splitted(2)))
-                case "play" => println(playCard(splitted(1) toInt))
-                case "switch" => println(switchCards(splitted(1) toInt, splitted(2) toInt))
-                case "remove" => println(removeUser(splitted(2)))
-                case "q" => println("Adios Amigos\n")
-            }
-        } else {
-            println("wrong syntax\n")
-        }
-
-    }
-
-    def matches(line : String): Boolean = {
-        var line2 = line.toLowerCase
-        line2.matches("((\\s)*y(\\s)*)|((\\s)*n(\\s)*)|((\\s)*(add)(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|" +
-        "((\\s)*start(\\s)+game(\\s)*)|((\\s)*(switch)(\\s)+[123](\\s)+[123](\\s)*)|" +
-        "((\\s)*play(\\s)+(\\d)+(\\s)*)|((\\s)*remove(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|((\\s)*q(\\s)*)")
-    }
-
     def answerYes(): String = {
         if (zustand == 3) {
             "hallo"
