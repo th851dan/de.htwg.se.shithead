@@ -3,6 +3,7 @@ package de.htwg.se.shithead.view
 import de.htwg.se.shithead.model.UserList
 import de.htwg.se.shithead.model.User
 import de.htwg.se.shithead.model.Card
+import de.htwg.se.shithead.controller.Controller
 
 object Tui {
     var user: User = _
@@ -35,4 +36,33 @@ object Tui {
     }
 
     def update() = show(user,true)
+
+        def matches(line : String): Boolean = {
+        var line2 = line.toLowerCase
+        line2.matches("((\\s)*y(\\s)*)|((\\s)*n(\\s)*)|((\\s)*(add)(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|" +
+        "((\\s)*start(\\s)+game(\\s)*)|((\\s)*(switch)(\\s)+[123](\\s)+[123](\\s)*)|" +
+        "((\\s)*play(\\s)+(\\d)+(\\s)*)|((\\s)*remove(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|((\\s)*q(\\s)*)")
+    }
+
+        def eval(line : String) {
+        if(matches(line)) {
+            line replaceFirst("^ *", "")
+            val splitted = line split("\\s+")
+            splitted(0) = splitted(0).toLowerCase
+            splitted(0) match {
+                case "y" => println(Controller.answerYes())
+                case "n" => println(Controller.answerNo())
+                case "start" => Controller.startGame()
+                case "add" => println(Controller.newUser(splitted(2)))
+                case "play" => println(Controller.playCard(splitted(1) toInt))
+                case "switch" => println(Controller.switchCards(splitted(1) toInt, splitted(2) toInt))
+                case "remove" => println(Controller.removeUser(splitted(2)))
+                case "q" => println("Adios Amigos\n")
+            }
+        } else {
+            println("wrong syntax\n")
+        }
+
+    }
+
 }
