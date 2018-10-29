@@ -9,18 +9,18 @@ object Controller {
     //status
     var status: Int = 0
     var nextUser: User = _
+    var user: User = _
 
     def begin() = {
         for (u <- UserList.userList) {
-            var i = 0
-            for (i <- 1 to 3) {
-                var card = CardStack.pullFromTop
+            for (_ <- 1 to 3) {
+                val card = CardStack.pullFromTop
                 card.visibility = true
                 u.addHand(card)
             }
-            for (i <- 1 to 3) u.addTable(CardStack.pullFromTop)
-            for (i <- 1 to 3) {
-                var card = CardStack.pullFromTop
+            for (_ <- 1 to 3) u.addTable(CardStack.pullFromTop)
+            for (_ <- 1 to 3) {
+                val card = CardStack.pullFromTop
                 card.visibility = true
                 u.addTable(card)
             }
@@ -28,8 +28,8 @@ object Controller {
     }
 
     def build(u: User,b: Boolean):String = {
-        var user = u
-        var sb: StringBuilder = new StringBuilder()
+        user = u
+        val sb: StringBuilder = new StringBuilder()
         var i:Int = 0
         if (u.userCardStackHand.size != 0) {
             sb.append(u.name + ": \nCards on your hand: \n" )
@@ -56,7 +56,7 @@ object Controller {
     def getUserListLength():Int = UserList.userListLength() + 1
 
     def buildAll(b: Boolean):String = { 
-        var sb = new StringBuilder()
+        val sb = new StringBuilder()
         for(u <- UserList userList) {
             sb.append(build(u ,true))
         }
