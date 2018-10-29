@@ -2,8 +2,10 @@ package de.htwg.se.shithead.model
 
 object UserList {
     var userList: List[User] = List()
+    
+    def userListLength() = userList.length
 
-    def addUser(name: String) = {
+    def addUser(name: String):Boolean = {
         if (!isValid(name)) {
             userList = new User(name) :: userList
             true
@@ -12,7 +14,7 @@ object UserList {
         }
     }
 
-    def removeUser(name: String) = {
+    def removeUser(name: String):Boolean = {
         if (isValid(name)) {
             userList = userList.filter(_.name != name)
             true
