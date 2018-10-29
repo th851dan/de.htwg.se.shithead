@@ -37,14 +37,14 @@ object Tui {
 
     def update() = show(user,true)
 
-        def matches(line : String): Boolean = {
+    def matches(line : String): Boolean = {
         var line2 = line.toLowerCase
         line2.matches("((\\s)*y(\\s)*)|((\\s)*n(\\s)*)|((\\s)*(add)(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|" +
         "((\\s)*start(\\s)+game(\\s)*)|((\\s)*(switch)(\\s)+[123](\\s)+[123](\\s)*)|" +
         "((\\s)*play(\\s)+(\\d)+(\\s)*)|((\\s)*remove(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|((\\s)*q(\\s)*)")
     }
 
-        def eval(line : String) {
+    def eval(line : String) {
         if(matches(line)) {
             line replaceFirst("^ *", "")
             val splitted = line split("\\s+")
