@@ -6,8 +6,8 @@ object Tui {
 
     def matches(line : String): Boolean = {
         var line2 = line.toLowerCase
-        line2.matches("((\\s)*y(\\s)*)|((\\s)*n(\\s)*)|((\\s)*(add)(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|" +
-        "((\\s)*start(\\s)+game(\\s)*)|((\\s)*(switch)(\\s)+[123](\\s)+[123](\\s)*)|" +
+        line2.matches("((\\s)*y+[123](\\s)+[123](\\s)*)|((\\s)*n(\\s)*)|((\\s)*(add)(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|" +
+        "((\\s)*start(\\s)+game(\\s)*)|" +
         "((\\s)*play(\\s)+(\\d)+(\\s)*)|((\\s)*remove(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|((\\s)*q(\\s)*)")
     }
 
@@ -17,31 +17,30 @@ object Tui {
             val splitted = line split("\\s+")
             splitted(0) = splitted(0).toLowerCase
             splitted(0) match {
-                case "y" => println(answerYes())
+                case "y" => println(answerYes(splitted(1) toInt, splitted(2) toInt))
                 case "n" => println(answerNo())
                 case "start" => startGame()
                 case "add" => println(newUser(splitted(2)))
                 case "play" => println(playCard(splitted(1) toInt))
-                case "switch" => println(switchCards(splitted(1) toInt, splitted(2) toInt))
+                case "switch" => println()
                 case "remove" => println(removeUser(splitted(2)))
                 case "q" => println("Adios Amigos\n")
             }
         } else {
             println("wrong syntax\n")
         }
-
     }
 
-        def answerYes(): String = {
-        if (Controller.getStatus() == 3) {
-            "hallo"
+    def answerYes(id1:Int, id2:Int): String = {
+        if (Controller.getState() == 2) {
+            Controller.changeCards(id1,id2)
         } else {
             "Opeartion not available"
         }
     }
 
     def answerNo(): String = {
-        if (Controller.getStatus() == 2) {
+        if (Controller.getState() == 2) {
             "bla"
         } else {
             "Opeartion not available"
@@ -49,7 +48,7 @@ object Tui {
     }
     
     def newUser(name : String): String = {
-        if (Controller.getStatus == 0) {
+        if (Controller.getState == 0) {
             if (Controller.getUserListLength()  < 6) {
                 if (Controller add(name))
                     "New user added: " + name + "\n"
@@ -64,30 +63,31 @@ object Tui {
     }
 
     def startGame(){
-        if (Controller.getStatus() == 0) {
+        if (Controller.getState() == 0) {
             if (Controller.getUserListLength < 2) {
                 println("You need at least 2 players\n")
             } else {
-                Controller.setStatus(1)
+                Controller.setState(1)
                 println("Game starts: \n")
                 start
             }
-
         } else {
             "Opeartion not available\n"
         }
     }
 
-    def switchCards(id1 : Int, id2 : Int): String = {
-        if (Controller.getStatus() == 3) {
-            "hallo"
+    def printUser()= {
+        if(Controller.getState() == 2) {
+            println(Controller.getNextUser + " Do you want to swap cards? y ID1 ID2 (1-3) / n \n")
+        } else if(Controller.getState() == 3 ) {
+
         } else {
-            "Opeartion not available\n"
+
         }
     }
 
     def playCard(id : Int): String = {
-        if (Controller.getStatus() == 4) {
+        if (Controller.getState() == 4) {
             "hallo"
         } else {
             "Opeartion not available\n"
@@ -96,7 +96,7 @@ object Tui {
 
     def removeUser(name : String): String = {
         var bool: Boolean = false
-        if (Controller.getStatus() == 0) {
+        if (Controller.getState() == 0) {
             if (Controller.getUserListLength() == 0)
                 "No users available\n"
             else if (Controller.remove(name))
@@ -107,10 +107,11 @@ object Tui {
     }
 
     def start() = {
-        if (Controller.getStatus() == 1) {
+        if (Controller.getState() == 1) {
             Controller begin()
             println("Start")
             showAll(true)
+            printUser()
         } else if (Controller.getUserListLength() < 2) {
             println("You need at least 2 players")
         } else {
@@ -122,4 +123,5 @@ object Tui {
 
     def showAll(b:Boolean) =  println(Controller.buildAll(b))
 
+    
 }
