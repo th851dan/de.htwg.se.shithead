@@ -2,9 +2,9 @@ package de.htwg.se.shithead.model
 
 sealed abstract class State(val value: Int) {
   var status: State = _
-  val statusList = List(BeforeStart, DuringStart, RunningGame)
+ // val statusList = List(BeforeStart, DuringStart, RunningGame)
 
-  case object BeforeStart extends State()
+ /* case object BeforeStart extends State()
 
   case object DuringStart extends State()
 
@@ -17,4 +17,5 @@ sealed abstract class State(val value: Int) {
       println("State doesn't exist!")
     }
   }
+  */
 }

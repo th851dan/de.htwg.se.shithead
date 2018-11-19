@@ -1,5 +1,4 @@
 package de.htwg.se.shithead.model
-import de.htwg.se.shithead.model.CardStack
 
 object UserList {
     var userList: List[User] = List()
@@ -44,12 +43,12 @@ object UserList {
         currentUser = userList(0)
     }
 
-    def getNextUser() = {
+    def getNextUser():User = {
         var i : Int = 0
         for(u <- userList) {
             if (u.equals(currentUser)) {
                 i = i + 1
-                if(userList(i) != null) {
+                if(userList(i) != null) { // Hier noch weg finden für nicht null
                     currentUser = userList(i)
                     0
                 } else {
@@ -58,5 +57,17 @@ object UserList {
             }
             i = i + 1
         }
+        currentUser
+    }
+
+    def switchCards(c1:Int, c2:Int): String = {        
+        if(c1 > 2 | c1 < 0 | c2 > 2 | c2 < 0)
+            "Failed: Wrong Parameter\n"
+        else {
+            val cardH = this.currentUser.userCardStackHand(c1)
+            this.currentUser.userCardStackHand.updated(c1,this.currentUser.userCardStackTable(c2))
+            this.currentUser.userCardStackTable.updated(c2, cardH)    
+            "success\n"
+        }     
     }
 }

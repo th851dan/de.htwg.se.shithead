@@ -6,7 +6,7 @@ object Tui {
 
     def matches(line : String): Boolean = {
         var line2 = line.toLowerCase
-        line2.matches("((\\s)*y+[123](\\s)+[123](\\s)*)|((\\s)*n(\\s)*)|((\\s)*(add)(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|" +
+        line2.matches("((\\s)*y(\\s)+[123](\\s)+[123](\\s)*)|((\\s)*n(\\s)*)|((\\s)*(add)(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|" +
         "((\\s)*start(\\s)+game(\\s)*)|" +
         "((\\s)*play(\\s)+(\\d)+(\\s)*)|((\\s)*remove(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|((\\s)*q(\\s)*)")
     }
@@ -22,7 +22,6 @@ object Tui {
                 case "start" => startGame()
                 case "add" => println(newUser(splitted(2)))
                 case "play" => println(playCard(splitted(1) toInt))
-                case "switch" => println()
                 case "remove" => println(removeUser(splitted(2)))
                 case "q" => println("Adios Amigos\n")
             }
@@ -33,15 +32,21 @@ object Tui {
 
     def answerYes(id1:Int, id2:Int): String = {
         if (Controller.getState() == 2) {
-            Controller.changeCards(id1,id2)
+            var s = Controller.changeCards(id1,id2)
+            printUser()
+            s
         } else {
             "Opeartion not available"
         }
     }
 
-    def answerNo(): String = {
+    def answerNo() = {
         if (Controller.getState() == 2) {
-            "bla"
+            if(Controller.compareToStartUser()) {
+                Controller.setState(3)
+            } else {
+                printUser()
+            }
         } else {
             "Opeartion not available"
         } 
@@ -70,6 +75,7 @@ object Tui {
                 Controller.setState(1)
                 println("Game starts: \n")
                 start
+                printUser()
             }
         } else {
             "Opeartion not available\n"
@@ -78,7 +84,7 @@ object Tui {
 
     def printUser()= {
         if(Controller.getState() == 2) {
-            println(Controller.getNextUser + " Do you want to swap cards? y ID1 ID2 (1-3) / n \n")
+            println(Controller.getCurrentUserName + " Do you want to swap cards? y ID1 ID2 (1-3) / n \n")
         } else if(Controller.getState() == 3 ) {
 
         } else {
@@ -109,9 +115,8 @@ object Tui {
     def start() = {
         if (Controller.getState() == 1) {
             Controller begin()
-            println("Start")
             showAll(true)
-            printUser()
+            Controller.setState(2)
         } else if (Controller.getUserListLength() < 2) {
             println("You need at least 2 players")
         } else {

@@ -4,32 +4,16 @@ import de.htwg.se.shithead.model.User
 import de.htwg.se.shithead.model.UserList
 import de.htwg.se.shithead.model.CardStack
 import de.htwg.se.shithead.model.Card
+import de.htwg.se.shithead.model.State
 
 object Controller {
     //status
     var status: Int = 0
-    var nextUser: User = _
-    var user: User = _
-
-    def begin() = {
-        for (u <- UserList.userList) {
-            for (_ <- 1 to 3) {
-                val card = CardStack.pullFromTop
-                card.visibility = true
-                u.addHand(card)
-            }
-            for (_ <- 1 to 3) u.addTable(CardStack.pullFromTop)
-            for (_ <- 1 to 3) {
-                val card = CardStack.pullFromTop
-                card.visibility = true
-                u.addTable(card)
-            }
-        }
-    }
+    var startUser: User = _
 
     def build(u: User,b: Boolean):String = {
-        user = u
-        val sb: StringBuilder = new StringBuilder()
+        var user:User = u
+        val sb : StringBuilder = new StringBuilder()
         var i:Int = 0
         if (u.userCardStackHand.size != 0) {
             sb.append(u.name + ": \nCards on your hand: \n" )
@@ -63,16 +47,27 @@ object Controller {
         sb.toString
     }
 
-    def build(b:Boolean): String = build(nextUser,b)
+    def begin() = UserList.initialize()
+
+    def build(b:Boolean):String = build(getCurrentUser(),b)
 
     def remove(name: String):Boolean = UserList.removeUser(name)
 
     def add(name:String):Boolean = UserList.addUser(name)
+    
+    def setState(status: Int) = this status = status
 
-    def setStatus(status: Int) = this status = status
+    def getState() = this status
 
-    def getStatus() = this status    
+    def getCurrentUser():User = UserList.currentUser
+    
+    def getCurrentUserName():String = UserList.currentUser.NAME
 
+    def setNextUser():User = UserList.getNextUser
 
+    def changeCards(card1:Int, card2:Int):String = UserList.switchCards(card1 - 1,card2 - 1)
 
+    def setStartUser() = startUser = UserList.userList(0)
+
+    def compareToStartUser():Boolean = setNextUser.equals(startUser)
 }
