@@ -9,7 +9,14 @@ import de.htwg.se.shithead.model.State
 object Controller {
     //status
     var status: Int = 0
-    var startUser: User = _
+
+    def buildAll(b: Boolean):String = { 
+        val sb = new StringBuilder()
+        for(u <- UserList userList) {
+            sb.append(build(u ,b))
+        }
+        sb.toString
+    }
 
     def build(u: User,b: Boolean):String = {
         var user:User = u
@@ -39,14 +46,6 @@ object Controller {
 
     def getUserListLength():Int = UserList.userListLength() + 1
 
-    def buildAll(b: Boolean):String = { 
-        val sb = new StringBuilder()
-        for(u <- UserList userList) {
-            sb.append(build(u ,true))
-        }
-        sb.toString
-    }
-
     def begin() = UserList.initialize()
 
     def build(b:Boolean):String = build(getCurrentUser(),b)
@@ -67,7 +66,5 @@ object Controller {
 
     def changeCards(card1:Int, card2:Int):String = UserList.switchCards(card1 - 1,card2 - 1)
 
-    def setStartUser() = startUser = UserList.userList(0)
-
-    def compareToStartUser():Boolean = setNextUser.equals(startUser)
+    def compareToStartUser():Boolean = getCurrentUser.equals(UserList.userList(0))
 }

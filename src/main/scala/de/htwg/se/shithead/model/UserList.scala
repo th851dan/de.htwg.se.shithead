@@ -48,10 +48,10 @@ object UserList {
         for(u <- userList) {
             if (u.equals(currentUser)) {
                 i = i + 1
-                if(userList(i) != null) { // Hier noch weg finden für nicht null
+                if(i < userList.length) {
                     currentUser = userList(i)
-                    0
-                } else {
+                    i = 10
+                } else if (i == userList.length){
                     currentUser = userList(0)
                 }
             }
@@ -65,9 +65,12 @@ object UserList {
             "Failed: Wrong Parameter\n"
         else {
             val cardH = this.currentUser.userCardStackHand(c1)
-            this.currentUser.userCardStackHand.updated(c1,this.currentUser.userCardStackTable(c2))
-            this.currentUser.userCardStackTable.updated(c2, cardH)    
-            "success\n"
+            val cardT = this.currentUser.userCardStackTable(c2)
+            this.currentUser.removeHand(cardH)
+            this.currentUser.removeTable(cardT)
+            this.currentUser.addHand(cardT)
+            this.currentUser.addTable(cardH)
+            "Success\n"
         }     
     }
 }

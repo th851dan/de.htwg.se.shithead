@@ -17,8 +17,8 @@ object Tui {
             val splitted = line split("\\s+")
             splitted(0) = splitted(0).toLowerCase
             splitted(0) match {
-                case "y" => println(answerYes(splitted(1) toInt, splitted(2) toInt))
-                case "n" => println(answerNo())
+                case "y" => answerYes(splitted(1) toInt, splitted(2) toInt)
+                case "n" => answerNo()
                 case "start" => startGame()
                 case "add" => println(newUser(splitted(2)))
                 case "play" => println(playCard(splitted(1) toInt))
@@ -30,11 +30,10 @@ object Tui {
         }
     }
 
-    def answerYes(id1:Int, id2:Int): String = {
+    def answerYes(id1:Int, id2:Int) = {
         if (Controller.getState() == 2) {
-            var s = Controller.changeCards(id1,id2)
+            println(Controller.changeCards(id1,id2))
             printUser()
-            s
         } else {
             "Opeartion not available"
         }
@@ -42,6 +41,7 @@ object Tui {
 
     def answerNo() = {
         if (Controller.getState() == 2) {
+            Controller.setNextUser()
             if(Controller.compareToStartUser()) {
                 Controller.setState(3)
             } else {
@@ -85,16 +85,15 @@ object Tui {
     def printUser()= {
         if(Controller.getState() == 2) {
             println(Controller.getCurrentUserName + " Do you want to swap cards? y ID1 ID2 (1-3) / n \n")
-        } else if(Controller.getState() == 3 ) {
-
         } else {
-
+            "Operation not available\n"
         }
     }
 
     def playCard(id : Int): String = {
-        if (Controller.getState() == 4) {
-            "hallo"
+        if (Controller.getState() == 3) {
+            Controller.playCard(id)
+            Controller.build()
         } else {
             "Opeartion not available\n"
         }

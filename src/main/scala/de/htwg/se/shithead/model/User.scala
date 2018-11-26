@@ -15,7 +15,7 @@ case class User(name: String) {
     }
 
     def removeHand(card : Card) = {
-        userCardStackHand = userCardStackHand.filter(_ equals card)
+        userCardStackHand = userCardStackHand.filter(_ != card)
     }
 
     def addTable(card : Card) = {
@@ -23,6 +23,6 @@ case class User(name: String) {
     }
 
     def removeTable(card : Card) = {
-        userCardStackTable = userCardStackTable.filter(_ equals card)
+        userCardStackTable = userCardStackTable.filter(_ != card)
     }
 }

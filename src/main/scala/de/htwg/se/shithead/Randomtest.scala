@@ -7,7 +7,7 @@ import de.htwg.se.shithead.view.Tui
 
 import scala.io.StdIn.readLine
 
-object Shithead {
+object Randomtest {
 
     def main(args: Array[String]) {
         println("This is Shithead!")
@@ -21,10 +21,12 @@ object Shithead {
 
         // pullFromTop gibt jetzt nur noch eine Karte zurueck
         var input: String = ""
-        do {
-            input = readLine
-            // Controller processes input!
-            Tui.eval(input)
-        } while(input != "q" && input != "Q")
+        Tui.eval("add user Hans")
+        Tui.eval("add user Peter")
+        Tui.eval("start game")
+        Tui.eval("y 1 2")
+        Tui.eval("n")
+        Tui.eval("n")
+        println(Controller.buildAll(true))
     }
 }
