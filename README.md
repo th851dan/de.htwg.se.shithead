@@ -1,4 +1,9 @@
 # de.htwg.se.shithead
+
+[![Build Status](https://travis-ci.com/ju851zel/Rummy.svg?branch=master)](https://travis-ci.org/h3rzkasper/de.htwg.se.shithead)
+
+[![Coverage Status](https://coveralls.io/repos/github/h3rzkasper/de.htwg.se.shithead/badge.svg)](https://coveralls.io/github/h3rzkasper/de.htwg.se.shithead)
+
 ```
 ➜  de.htwg.se.shithead git:(master) git branch feature-test
 ➜  de.htwg.se.shithead git:(master) git checkout feature-test
