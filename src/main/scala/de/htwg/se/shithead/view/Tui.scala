@@ -21,7 +21,15 @@ object Tui {
                 case "n" => answerNo()
                 case "start" => startGame()
                 case "add" => println(newUser(splitted(2)))
-                case "play" => println(playCard(splitted(1) toInt))
+                case "play" => {
+                    for(i <- 0 to splitted.length - 1) {
+                        
+                    }
+                if(splitted.length == 1) println(playCard(List(splitted(1).toInt)))
+                                else if(splitted.length == 2) println(playCard(List(splitted(1).toInt, splitted(2).toInt)))
+                                else if(splitted.length == 3) println(playCard(List(splitted(1).toInt, splitted(2).toInt, splitted(3).toInt)))
+                                else println(playCard(List(splitted(1).toInt, splitted(2).toInt, splitted(3).toInt, splitted(4).toInt)))
+                }
                 case "remove" => println(removeUser(splitted(2)))
                 case "q" => println("Adios Amigos\n")
             }
@@ -44,6 +52,9 @@ object Tui {
             Controller.setNextUser()
             if(Controller.compareToStartUser()) {
                 Controller.setState(3)
+                println("Game starts:")
+                println("to use a card type in: play ID")
+                println(Controller.getCurrentUserName + " begins")
             } else {
                 printUser()
             }
@@ -84,16 +95,19 @@ object Tui {
 
     def printUser()= {
         if(Controller.getState() == 2) {
-            println(Controller.getCurrentUserName + " Do you want to swap cards? y ID1 ID2 (1-3) / n \n")
+            println(Controller.getCurrentUserName + " Do you want to swap cards? y ID1 ID2 (1-3) / n")
         } else {
             "Operation not available\n"
         }
     }
 
-    def playCard(id : Int): String = {
+    def playCard(list:List[Int]): String = {
         if (Controller.getState() == 3) {
-            Controller.playCard(id)
-            Controller.build()
+            if(Controller.playCard(list)) {
+                "Hallo"
+            } else {
+                "Hallo"
+            }
         } else {
             "Opeartion not available\n"
         }

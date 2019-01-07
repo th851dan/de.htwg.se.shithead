@@ -25,4 +25,16 @@ case class User(name: String) {
     def removeTable(card : Card) = {
         userCardStackTable = userCardStackTable.filter(_ != card)
     }
+
+    def size(): Int = {
+        if(userCardStackHand.length == 0) userCardStackTable.length 
+        else userCardStackHand.length
+    }
+
+    def getCard(id:Int):Card = {
+        if(userCardStackHand.length == 0) userCardStackTable(id)
+        else userCardStackTable(id)
+    }
+    
+    def isHand(): Boolean = userCardStackHand != 0
 }

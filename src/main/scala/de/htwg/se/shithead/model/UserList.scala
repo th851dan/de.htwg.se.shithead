@@ -40,6 +40,12 @@ object UserList {
                 u.addTable(card)
             }
         }
+
+        for(_ <- 1 to 3) { 
+            val card = CardStack.pullFromTop
+            card.visibility = true
+            CardStack.tableStack.addToTop(card)
+        }
         currentUser = userList(0)
     }
 
