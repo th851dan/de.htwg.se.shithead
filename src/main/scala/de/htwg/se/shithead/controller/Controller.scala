@@ -70,21 +70,7 @@ object Controller {
 
     def getTurn():String = getCurrentUserName + " It's your turn: "
 
-    def playCard(list:List[Int]): Boolean = {
-        val user: User = getCurrentUser
-        val size: Int = getCurrentUserCardStackLength
-        var b:Boolean = true
-
-        if(list.length > size && user.isHand() || list.length <= size) {
-            val firstElement = user.getCard(list(0))
-            var topCard = CardStack.getTopValue()
-            if(topCard.toString().equals("?")) b = true 
-            else if(topCard.rank.value >= firstElement.rank.value) b = false
-            for(i <- list)
-                if(!user.getCard(i).equals(firstElement)) b = false
-        } else  b = false
-        b
-    }
+    def playCard(list:List[Int]): Boolean = CardStack.playCard(list)
 
     def getCurrentUserCardStackLength() = getCurrentUser.size()
 }

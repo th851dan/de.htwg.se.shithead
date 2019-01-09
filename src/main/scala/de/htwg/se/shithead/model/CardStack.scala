@@ -24,6 +24,8 @@ object CardStack {
 
         def topElement():Card = cardStack(cardStack.length - 1)
 
+        def isEmpty():Boolean = cardStack.length == 0
+        
         private def isValidStack(cards: List[Card]): Boolean = cards.size <= 52 && cards.distinct.size == cards.size
     }
 
@@ -45,12 +47,25 @@ object CardStack {
         cardStack = cardStack.shuffle
     }
 
-    def getTopValue(): Card = {
+    def getTopValue(card:Card): Card = {
+        if(tableStack.cardStack.length == 0) tableStack = tableStack.addToTop(card)
         tableStack.topElement()
     }
 
-    def show(x: Option[Card]) = x match {
-        case Some(s) => s
-        case None => "?"
+    def playCard(list:List[Int]):Boolean = {
+        val user: User = UserList.currentUser
+        val size: Int = user.size()
+        var b:Boolean = true
+
+        if(list.length > size && !user.emptyHand() || list.length <= size) {
+            val firstElement = user.getCard(list(0))
+            var topCard = getTopValue(firstElement)
+
+            if(topCard.rank.value > firstElement.rank.value) b = false
+            for(i <- list)
+                if(!user.getCard(i).equals(firstElement)) b = false
+        } else  b = false
+        user.checkAmountOfCards()
+        b
     }
 }

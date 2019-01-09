@@ -36,5 +36,8 @@ case class User(name: String) {
         else userCardStackTable(id)
     }
     
-    def isHand(): Boolean = userCardStackHand != 0
+    def emptyHand(): Boolean = userCardStackHand == 0
+
+    def checkAmountOfCards() = if(userCardStackHand.length < 3) while(userCardStackHand.length < 3 && !CardStack.cardStack.isEmpty()) addHand(CardStack.pullFromTop())
+    
 }

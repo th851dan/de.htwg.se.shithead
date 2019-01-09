@@ -8,7 +8,7 @@ object Tui {
         var line2 = line.toLowerCase
         line2.matches("((\\s)*y(\\s)+[123](\\s)+[123](\\s)*)|((\\s)*n(\\s)*)|((\\s)*(add)(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|" +
         "((\\s)*start(\\s)+game(\\s)*)|" +
-        "((\\s)*play(\\s)+(\\d)+(\\s)*)|((\\s)*remove(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|((\\s)*q(\\s)*)")
+        "((\\s)*play((\\s)+(\\d+\\s*){1,4}))|((\\s)*remove(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|((\\s)*q(\\s)*)")
     }
 
     def eval(line : String) {
@@ -22,13 +22,9 @@ object Tui {
                 case "start" => startGame()
                 case "add" => println(newUser(splitted(2)))
                 case "play" => {
-                    for(i <- 0 to splitted.length - 1) {
-                        
-                    }
-                if(splitted.length == 1) println(playCard(List(splitted(1).toInt)))
-                                else if(splitted.length == 2) println(playCard(List(splitted(1).toInt, splitted(2).toInt)))
-                                else if(splitted.length == 3) println(playCard(List(splitted(1).toInt, splitted(2).toInt, splitted(3).toInt)))
-                                else println(playCard(List(splitted(1).toInt, splitted(2).toInt, splitted(3).toInt, splitted(4).toInt)))
+                    var list:List[Int] = List()
+                    for(i <- 1 to splitted.length - 1) list = splitted(i).toInt :: list
+                    playCard(list)
                 }
                 case "remove" => println(removeUser(splitted(2)))
                 case "q" => println("Adios Amigos\n")
@@ -52,10 +48,12 @@ object Tui {
             Controller.setNextUser()
             if(Controller.compareToStartUser()) {
                 Controller.setState(3)
-                println("Game starts:")
-                println("to use a card type in: play ID")
+                println("\nGame starts:\n")
+                println("To use a card type in: play ID (up to 4 times)")
                 println(Controller.getCurrentUserName + " begins")
+                println("You can play any Card since its the Beginning \n")
             } else {
+                println("")
                 printUser()
             }
         } else {
@@ -104,10 +102,12 @@ object Tui {
     def playCard(list:List[Int]): String = {
         if (Controller.getState() == 3) {
             if(Controller.playCard(list)) {
-                "Hallo"
+                "hallo"
             } else {
                 "Hallo"
             }
+            
+
         } else {
             "Opeartion not available\n"
         }
@@ -140,6 +140,4 @@ object Tui {
     def show(b: Boolean) = println(Controller.build(b))
 
     def showAll(b:Boolean) =  println(Controller.buildAll(b))
-
-    
 }
