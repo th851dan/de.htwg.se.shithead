@@ -1,5 +1,9 @@
 *.class
 *.log
 project
+<<<<<<< HEAD
 target
 .vscode
+=======
+target
+>>>>>>> 787e47b1c6e61def5cd026a17df24cd6a1b8f33a
