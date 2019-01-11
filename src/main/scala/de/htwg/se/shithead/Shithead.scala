@@ -12,13 +12,8 @@ object Shithead {
     def main(args: Array[String]) {
         println("This is Shithead!")
 
-        var controller = Controller
-
         var stack = CardStack
         stack.shuffle()
-        
-        var userList = UserList
-
         // pullFromTop gibt jetzt nur noch eine Karte zurueck
         var input: String = ""
         do {

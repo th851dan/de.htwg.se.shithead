@@ -1,6 +1,7 @@
 package de.htwg.se.shithead.view
 
 import de.htwg.se.shithead.controller.Controller
+import util.control.Breaks._
 
 object Tui {
 
@@ -24,23 +25,19 @@ object Tui {
                 case "play" => {
                     var list:List[Int] = List()
                     for(i <- 1 to splitted.length - 1) list = splitted(i).toInt :: list
-                    playCard(list)
+                    println(playCard(list))
                 }
                 case "remove" => println(removeUser(splitted(2)))
                 case "q" => println("Adios Amigos\n")
             }
-        } else {
-            println("wrong syntax\n")
-        }
+        } else println("wrong syntax\n") 
     }
 
     def answerYes(id1:Int, id2:Int) = {
         if (Controller.getState() == 2) {
             println(Controller.changeCards(id1,id2))
             printUser()
-        } else {
-            "Opeartion not available"
-        }
+        } else "Opeartion not available"
     }
 
     def answerNo() = {
@@ -50,15 +47,13 @@ object Tui {
                 Controller.setState(3)
                 println("\nGame starts:\n")
                 println("To use a card type in: play ID (up to 4 times)")
-                println(Controller.getCurrentUserName + " begins")
                 println("You can play any Card since its the Beginning \n")
+                printUser()
             } else {
                 println("")
                 printUser()
             }
-        } else {
-            "Opeartion not available"
-        } 
+        } else "Opeartion not available"
     }
     
     def newUser(name : String): String = {
@@ -71,9 +66,7 @@ object Tui {
             } else {
                 "Too many users (delete user with: remove name)\n"
             }
-        } else {
-            "Opeartion not available\n"
-        }
+        } else "Opeartion not available\n"
     }
 
     def startGame(){
@@ -86,31 +79,39 @@ object Tui {
                 start
                 printUser()
             }
-        } else {
-            "Opeartion not available\n"
-        }
+        } else "Opeartion not available\n"
+        
     }
 
     def printUser()= {
-        if(Controller.getState() == 2) {
-            println(Controller.getCurrentUserName + " Do you want to swap cards? y ID1 ID2 (1-3) / n")
-        } else {
-            "Operation not available\n"
-        }
+        if(Controller.getState() == 2) println(Controller.getCurrentUserName + " Do you want to swap cards? y ID1 ID2 (1-3) / n")
+        else if(Controller.getState() == 3) println(show(false))
+        else "Operation not available\n"
     }
 
     def playCard(list:List[Int]): String = {
         if (Controller.getState() == 3) {
-            if(Controller.playCard(list)) {
-                "hallo"
-            } else {
-                "Hallo"
+            breakable {
+                while(true) {
+                    if(Controller.playCard(list)) {
+                        println("Played: " +  Controller.getPlayedCard(list(0)) +
+                        "    Amount: " + list.length + "\n")
+                        if(Controller.hasFinished()) {
+                            println("You placed:" + Controller.getRank() + ".!")
+                            if(Controller.getRank() == Controller.getUserListLength() - 1) {
+                                Controller.setNextUser()
+                                println("You are last " + Controller.getCurrentUserName() + " :( \n GAME OVER !")
+                                eval("q")
+                            }
+                        }
+                        Controller.setNextUser()
+                        printUser()
+                        break
+                    } else println("That's not a card")
+                }
             }
-            
-
-        } else {
-            "Opeartion not available\n"
-        }
+            "It's your turn!\n"
+        } else "Opeartion not available\n"
     }
 
     def removeUser(name : String): String = {
@@ -132,9 +133,7 @@ object Tui {
             Controller.setState(2)
         } else if (Controller.getUserListLength() < 2) {
             println("You need at least 2 players")
-        } else {
-            println("You are already ingame")
-        }
+        } else println("You are already ingame")
     }
 
     def show(b: Boolean) = println(Controller.build(b))

@@ -10,8 +10,11 @@ import scala.io.StdIn.readLine
 object Randomtest {
 
     def main(args: Array[String]) {
-        var list:List[Int] = List()
-        2 :: list
-        println(list)
+        Tui.eval("add user hans")
+        Tui.eval("add user peter")
+        Tui.eval("start game")
+        Tui.eval("n")
+        Tui.eval("n")
+        Tui.eval("play 2")
     }
 }

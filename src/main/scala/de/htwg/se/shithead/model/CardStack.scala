@@ -29,22 +29,16 @@ object CardStack {
         private def isValidStack(cards: List[Card]): Boolean = cards.size <= 52 && cards.distinct.size == cards.size
     }
 
+    def addToTop(card: Card) = cardStack = cardStack.addToTop(card)
+    
+    def addToTop(cardsToAdd: List[Card]) = cardStack = cardStack.addToTop(cardsToAdd)
+
+    def shuffle() = cardStack = cardStack.shuffle
+
     def pullFromTop(): Card = {
         val tuple = cardStack.pullFromTop
         cardStack = tuple._2
         tuple._1
-    }
-    
-    def addToTop(card: Card) = {
-        cardStack = cardStack.addToTop(card)
-    }
-
-    def addToTop(cardsToAdd: List[Card]) = {
-        cardStack = cardStack.addToTop(cardsToAdd)
-    }
-
-    def shuffle() = {
-        cardStack = cardStack.shuffle
     }
 
     def getTopValue(card:Card): Card = {
@@ -66,6 +60,7 @@ object CardStack {
                 if(!user.getCard(i).equals(firstElement)) b = false
         } else  b = false
         user.checkAmountOfCards()
+        if(user.userCardStackTable.length == 0) user.finished = true
         b
     }
 }

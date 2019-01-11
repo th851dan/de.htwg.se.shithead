@@ -41,7 +41,7 @@ object Controller {
         } else {
             sb.append("\n\n")
         }
-        sb toString()
+        sb.toString()
     }
 
     def getUserListLength():Int = UserList.userListLength()
@@ -62,7 +62,7 @@ object Controller {
     
     def getCurrentUserName():String = UserList.currentUser.NAME
 
-    def setNextUser():User = UserList.getNextUser
+    def setNextUser() = UserList.getNextUser()
 
     def changeCards(card1:Int, card2:Int):String = UserList.switchCards(card1 - 1,card2 - 1)
 
@@ -70,7 +70,13 @@ object Controller {
 
     def getTurn():String = getCurrentUserName + " It's your turn: "
 
-    def playCard(list:List[Int]): Boolean = CardStack.playCard(list)
+    def playCard(list:List[Int]):Boolean = CardStack.playCard(list)
+
+    def getPlayedCard(card1:Int):String = getCurrentUser.getCard(card1).toString()
 
     def getCurrentUserCardStackLength() = getCurrentUser.size()
+
+    def hasFinished():Boolean = getCurrentUser().hasFinished()
+
+    def getRank():Int = UserList.getRank()
 }
