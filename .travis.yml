@@ -1,11 +1,6 @@
 language: scala
 scala:
-  - 2.11.8
   - 2.11.12
-script:
-  - cd build-sbt
-  - sbt ++$TRAVIS_SCALA_VERSION test
 branches:
   only:
-    - master
     - development
