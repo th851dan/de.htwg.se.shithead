@@ -3,6 +3,7 @@ package de.htwg.se.shithead.model
 
 sealed abstract class State(val value: Int) {
   var status: State = _
+}
  // val statusList = List(BeforeStart, DuringStart, RunningGame)
 
  /* case object BeforeStart extends State()
