@@ -23,13 +23,18 @@ case class User(name: String) {
 
   def addHand(card: Card) = userCardStackHand = card :: userCardStackHand
 
+// NOTIZ: Solte size nicht einfach alle Karten, die ein user hat zurueckgeben?
   def size(): Int = {
     if (userCardStackHand.length == 0) userCardStackTable.length
     else userCardStackHand.length
   }
 
+// NOTIZ: fuer welchen Zweck benutzt du getCard? Sollte das nicht auch eine Karte vom Stapel entfernen? 
+//        Warum haben wir ploetzlich eine ID? Woher kommt die ID?
+//        Du kannst doch auch einfach die List Operation von Scala benutzen...
   def getCard(id: Int): Card = {
     if (userCardStackHand.length == 0) userCardStackTable(id)
-    else userCardStackTable(id)
+// VORSICHT: Hab von userCardStackTable zu userCardStackHand getauscht, da sonst die if keinen Sinn ergibt!!
+    else userCardStackHand(id)
   }
 }
