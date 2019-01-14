@@ -82,6 +82,7 @@ class UserSpec extends WordSpec with Matchers {
             }
         }
     }
+    /*
     "An User" when {
         val user = User("test")
         "called emptyHand" should {
@@ -91,7 +92,7 @@ class UserSpec extends WordSpec with Matchers {
             }
         }
     }
- /*   "An User" when {
+    "An User" when {
         val user = User("test")
         "called emptyHand" should {
             val returnVal = user.emptyHand
