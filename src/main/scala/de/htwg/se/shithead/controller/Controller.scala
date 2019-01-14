@@ -45,8 +45,6 @@ object Controller {
 
   def begin() = UserList.initialize()
 
-  def checkIfLastCardWasATen(): Boolean = CardStack.tableStack.topElement().rank.value == 10
-
   def build(b: Boolean): String = build(getCurrentUser(), b)
 
   def remove(name: String): Boolean = UserList.removeUser(name)

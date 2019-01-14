@@ -11,5 +11,6 @@ object Randomtest {
     Tui.eval("n")
     Tui.eval("n")
     Tui.eval("play 2")
+    Tui.eval("play 1")
   }
 }

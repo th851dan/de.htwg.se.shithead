@@ -46,6 +46,7 @@ object Tui {
       Controller.setNextUser()
       if (Controller.compareToStartUser()) {
         Controller.setState(3)
+        println(Controller.getCurrentUserName)
         println("\nGame starts:\n")
         println("To use a card type in: play ID (up to 4 times)")
         println("You can play any Card since its the Beginning \n")
@@ -101,13 +102,10 @@ object Tui {
             if (Controller.hasFinished()) {
               println("You placed:" + Controller.getRank() + ".!")
               if (Controller.getRank() == Controller.getUserListLength() - 1) {
-                if(Controller.checkIfLastCardWasATen())
-                  Controller.setNextUser()
                 println("You are last " + Controller.getCurrentUserName() + " :( \n GAME OVER !")
                 eval("q")
               }
             }
-            Controller.setNextUser()
             printUser()
             break
           } else println("That's not a card")
