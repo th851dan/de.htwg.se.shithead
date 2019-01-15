@@ -13,8 +13,4 @@ class CardSpec extends WordSpec with Matchers {
             }
         }
     }
-<<<<<<< HEAD
 } 
-=======
-}
->>>>>>> 8c3a5c5defc22c8173a394af01301e4dbff1dab0
