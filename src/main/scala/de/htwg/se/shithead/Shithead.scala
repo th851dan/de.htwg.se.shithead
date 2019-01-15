@@ -11,7 +11,7 @@ object Shithead {
     println("This is Shithead!")
 
     var stack = CardStack
-    stack.shuffle()
+    stack.shuffleCardStack()
     // pullFromTop gibt jetzt nur noch eine Karte zurueck
     var input: String = ""
     do {

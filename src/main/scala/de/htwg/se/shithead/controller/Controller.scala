@@ -8,12 +8,10 @@ object Controller {
 
   def buildAll(b: Boolean): String = {
     val sb = new StringBuilder()
-    for (u <- UserList userList) {
+    for (u <- UserList userList)
       sb.append(build(u, b))
-    }
     sb.toString
   }
-
 
   def build(u: User, b: Boolean): String = {
     var user: User = u
@@ -43,7 +41,7 @@ object Controller {
 
   def getUserListLength(): Int = UserList.userListLength()
 
-  def begin() = UserList.initialize()
+  def begin():Unit = UserList.initialize()
 
   def build(b: Boolean): String = build(getCurrentUser(), b)
 
@@ -51,11 +49,11 @@ object Controller {
 
   def add(name: String): Boolean = UserList.addUser(name)
 
-  def getState() = this status
+  def getState(): Int = this.status
 
-  def setState(status: Int) = this status = status
+  def setState(status: Int): Unit = this.status = status
 
-  def setNextUser() = UserList.getNextUser()
+  def setNextUser() = UserList.setNextUser()
 
   def changeCards(card1: Int, card2: Int): String = UserList.switchCards(card1 - 1, card2 - 1)
 
@@ -67,13 +65,11 @@ object Controller {
 
   def playCard(list: List[Int]): Boolean = CardStack.playCard(list)
 
-  def getPlayedCard(card1: Int): String = getCurrentUser.getCard(card1).toString()
-
-  def getCurrentUserCardStackLength() = getCurrentUser.size()
-
-  def hasFinished(): Boolean = getCurrentUser().hasFinished()
+  def getPlayedCard(): String = CardStack.tableStack.cardStack.head.toString
 
   def getCurrentUser(): User = UserList.currentUser
 
   def getRank(): Int = UserList.getRank()
+
+  def currentUserHasHand(): Boolean = this.getCurrentUser.userCardStackHand.length > 2
 }
