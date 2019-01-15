@@ -3,74 +3,70 @@ package de.htwg.se.shithead.model
 object UserList {
   var userList: List[User] = List()
   var currentUser: User = _
-  var winners: List[User] = List()
+  var fullUserListLength = 0
 
-  def userListLength() = userList.length
+  def userListLength():Int = userList.length
 
-  def getRank(): Int = winners.length
+  def getRank(): Int = fullUserListLength - userListLength()
 
-  def addUser(name: String): Boolean = {
-    if (!isValid(name)) {
-      userList = new User(name) :: userList
+  def addUser(name: String): Boolean = isValid(name) match {
+    case false => {
+      userList = new User(name,List(),List()) :: userList
+      fullUserListLength = fullUserListLength + 1
       true
-    } else false
+    }
+    case true => false
   }
 
-  private def isValid(name: String) = userList.exists(_.name == name)
+  private def isValid(name: String):Boolean = userList.exists(_.name == name)
 
-  def removeUser(name: String): Boolean = {
-    if (isValid(name)) {
+  def removeUser(name: String): Boolean = isValid(name) match {
+    case true => {
       userList = userList.filter(_.name != name)
       true
-    } else false
+    }
+    case false => false
   }
 
-  def initialize() = {
-    for (u <- userList) {
-      for (_ <- 1 to 3) {
-        val card = CardStack.pullFromTop
-        card.visibility = true
-        u.addHand(card)
-      }
-      for (_ <- 1 to 3) u.addTable(CardStack.pullFromTop)
-      for (_ <- 1 to 3) {
-        val card = CardStack.pullFromTop
-        card.visibility = true
-        u.addTable(card)
-      }
-    }
-    for (_ <- 1 to 3) {
-      val card = CardStack.pullFromTop
-      card.visibility = true
-      CardStack.tableStack.addToTop(card)
-    }
+  private def iniCards(user:User): Unit = {
+    var u:User = user
+    var card = CardStack.pullFromTopCardStack()
+    card = card.setVisibility(true)
+    u = user.addTable(card)
+    u = u.addTable(CardStack.pullFromTopCardStack())
+    card = CardStack.pullFromTopCardStack()
+    card = card.setVisibility(true)
+    u = u.addHand(card)
+    userList = updateList(u)
+  }
+
+  def initialize(): Unit = {
+    for(i <- 0 to userListLength() - 1; j <- 1 to 3) iniCards(userList(i))
     currentUser = userList(0)
   }
 
-  def getNextUser(): User = {
-    var i: Int = 0
-    for (u <- userList) {
-      if (u.equals(currentUser)) {
-        i = i + 1
-        if (i < userList.length) {
-          currentUser = userList(i)
-          i = 10
-        } else if (i == userList.length) currentUser = userList(0)
-      }
-      i = i + 1
-    }
-    currentUser
+  def setNextUser(): Unit =
+    for(List(left, right) <- userList.sliding(2)) {
+    if(left.NAME.equals(currentUser.NAME)) currentUser = right
+    else if(currentUser.NAME.equals(userList(userListLength()-1).NAME)) currentUser = userList(0)
   }
 
-  def switchCards(c1: Int, c2: Int): String = {
-    if (c1 > 2 | c1 < 0 | c2 > 2 | c2 < 0) "Failed: Wrong Parameter\n"
-    else {
-      val cardH = this.currentUser.userCardStackHand(c1)
-      val cardT = this.currentUser.userCardStackTable(c2)
-      this.currentUser.removeHand(cardH)
-      this.currentUser.removeTable(cardT)
-      this.currentUser.addHand(cardT)
-      this.currentUser.addTable(cardH)
+  def updateList(user:User): List[User] = {
+    var list:List[User] = List()
+    userList.reverse.foreach(u => if(u.NAME == user.NAME) list = user :: list else list = u :: list)
+    list
+  }
+
+  def switchCards(c1: Int, c2: Int): String = c1 > 2 || c1 < 0 || c2 > 2 || c2 < 0 match {
+    case true =>"Failed: Wrong Parameter\n"
+    case false => {
+      val cardH = currentUser.userCardStackHand(c1)
+      val cardT = currentUser.userCardStackTable(c2)
+      currentUser = currentUser.removeHand(cardH)
+      currentUser = currentUser.removeTable(cardT)
+      currentUser = currentUser addHand (cardT)
+      currentUser = currentUser.addTable(cardH)
+      userList = updateList(currentUser)
       "Success\n"
     }
   }

@@ -1,40 +1,29 @@
 package de.htwg.se.shithead.model
 
-case class User(name: String) {
-  val UUID: String = java.util.UUID.randomUUID.toString
+case class User(name: String, stackHand:List[Card], stackTable:List[Card]) {
   val NAME: String = name
-  var finished: Boolean = false
-  var userCardStackHand: List[Card] = List()
-  var userCardStackTable: List[Card] = List()
+  val userCardStackHand: List[Card] = stackHand
+  val userCardStackTable: List[Card] = stackTable
 
-  def addHand(list: List[Card]) = userCardStackHand = list ::: userCardStackHand
+  def addHand(list: List[Card]): User = copy(NAME, list ::: userCardStackHand, userCardStackTable)
 
-  def removeHand(card: Card) = userCardStackHand = userCardStackHand.filter(_ != card)
+  def addHand(card: Card):User = copy(NAME, card :: userCardStackHand, userCardStackTable)
 
-  def addTable(card: Card) = userCardStackTable = card :: userCardStackTable
+  def removeHand(card: Card): User = copy(NAME, remove(card,userCardStackHand), userCardStackTable)
 
-  def removeTable(card: Card) = userCardStackTable = userCardStackTable.filter(_ != card)
+  def addTable(card: Card): User = copy(NAME, userCardStackHand, card :: userCardStackTable)
+
+  def removeTable(card: Card):User = copy(NAME, userCardStackHand, remove(card, userCardStackTable))
+
+  private def remove(card: Card, list:List[Card]): List[Card] = list diff List(card)
 
   def emptyHand(): Boolean = userCardStackHand == 0
 
-  def hasFinished(): Boolean = this.finished
-
-  def checkAmountOfCards() = if (userCardStackHand.length < 3) while (userCardStackHand.length < 3 && !CardStack.cardStack.isEmpty()) addHand(CardStack.pullFromTop())
-
-  def addHand(card: Card) = userCardStackHand = card :: userCardStackHand
-
-// NOTIZ: Solte size nicht einfach alle Karten, die ein user hat zurueckgeben?
-  def size(): Int = {
-    if (userCardStackHand.length == 0) userCardStackTable.length
-    else userCardStackHand.length
-  }
-
-// NOTIZ: fuer welchen Zweck benutzt du getCard? Sollte das nicht auch eine Karte vom Stapel entfernen? 
-//        Warum haben wir ploetzlich eine ID? Woher kommt die ID?
-//        Du kannst doch auch einfach die List Operation von Scala benutzen...
-  def getCard(id: Int): Card = {
-    if (userCardStackHand.length == 0) userCardStackTable(id)
-// VORSICHT: Hab von userCardStackTable zu userCardStackHand getauscht, da sonst die if keinen Sinn ergibt!!
-    else userCardStackHand(id)
+  def getCard(id: Int): Card = userCardStackHand.length match {
+    case 0 => {
+      if (userCardStackTable.length > 3) userCardStackTable(id + 3)
+      else userCardStackTable(id)
+    }
+    case _ => userCardStackHand(id)
   }
 }
