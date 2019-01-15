@@ -4,82 +4,84 @@ import org.scalatest._
 
 class UserListSpec extends WordSpec with Matchers {
     "An UserList" when {
-        "created" should {
-            val userList = UserList
-            "have new userList empty" in {
-                userList.userList.isEmpty should be(true)
-            }
-            "have currentUser None" in {
-                userList.currentUser should be(null)
-            }
-            "have winner list empty" in {
-                userList.winners.isEmpty should be(true)
-            }
-        }
-    }
-    "An UserList" when {
+        val userList = UserList
+        userList.addUser("test1")
+        userList.initialize
         "userListLength is called" should {
-            val userList = UserList
-            userList.addUser("test")
             "return lenght of userList" in {
-                userList.userListLength should be(1)
+                userList.userListLength should be(userList.userList.length)
             }
         }
-    }
-    "An UserList" when {
-        "isValid is called" should {
-            val userList = UserList
-            userList.addUser("test")
-            "return true if user is in userList" in {
-                userList.isValid("test") should be(true)
-            }
-            "return false if user is not in userList" in {
-                userList.isValid("tes") should be(false)
+        "getRank is called" should {
+            "return rank" in {
+                userList.getRank should be(userList.fullUserListLength - userList.userListLength)
             }
         }
-    }
-    "An UserList" when {
         "addUser is called" should {
-            val userList = UserList
             "return true if possible" in {
-                userList.addUser("test") should be(true)
+                userList.addUser("test2") should be(true)
             }
             "return false if not possible" in {
-                userList.addUser("test") should be(false)
+                userList.addUser("test2") should be(false)
             }
         }
-    }
-    "An UserList" when {
+        userList.addUser("test")
         "removeUser is called" should {
-            val userList = UserList
+            "return true if possible" in {
+                userList.removeUser("test") should be(true)
+            }
             "return false if not possible" in {
                 userList.removeUser("test") should be(false)
             }
             userList.addUser("test")
-            "return true if possible" in {
-                userList.removeUser("test") should be(true)
+            val user = userList.userList.filter(_.name == "test")
+            userList.removeUser("test")
+            "remove user from list" in {
+                userList.userList.contains(user) should be(false)
             }
         }
-    }
-/*
-    "An UserList" when {
+        userList.initialize
         "initialize is called" should {
-
+            "currentUser should be updated to first entry in userList" in {
+                userList.currentUser should be(userList.userList(0))
+            }
         }
+        
     }
-*/
+}
+     /*
     "An UserList" when {
-        "getNextUser is called" should {
+    }
+    "An UserList" when {
+    }
+    "An UserList" when {
+        
+    }
+    "An UserList" when {
+        "setNextUser is called" should {
             val userList = UserList
             userList.addUser("test1")
             userList.addUser("test2")
             userList.initialize
-            "return next user" in {
-                userList.getNextUser should be(userList.userList(1))
+            "currentUser should be second element of userList" in {
+                userList.setNextUser
+                userList.currentUser should be(userList.userList(1))
             }
-            "return first user if currentUser is last" in {
-                userList.getNextUser should be(userList.userList(0))
+            "currentUser should be first element of userList" in {
+                userList.setNextUser
+                userList.currentUser should be(userList.userList(0))
             }
         }
     }
+
+    "An UserList" when {
+        "updateList is called" should {
+            val userList = UserList
+            userList.addUser("test1")
+            userList.initialize
+
+        }
+    }
+
 }
+*/
