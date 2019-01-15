@@ -7,13 +7,11 @@ class UserListSpec extends WordSpec with Matchers {
         val userList = UserList
         userList.addUser("test1")
         userList.initialize
-/*
         "initialize is called" should {
             "currentUser should be updated to first entry in userList" in {
                 userList.currentUser should be(userList.userList(0))
             }
         }
-*/
         "userListLength is called" should {
             "return lenght of userList" in {
                 userList.userListLength should be(userList.userList.length)
@@ -47,42 +45,5 @@ class UserListSpec extends WordSpec with Matchers {
                 userList.userList.contains(user) should be(false)
             }
         }
-        
     }
 }
-     /*
-    "An UserList" when {
-    }
-    "An UserList" when {
-    }
-    "An UserList" when {
-        
-    }
-    "An UserList" when {
-        "setNextUser is called" should {
-            val userList = UserList
-            userList.addUser("test1")
-            userList.addUser("test2")
-            userList.initialize
-            "currentUser should be second element of userList" in {
-                userList.setNextUser
-                userList.currentUser should be(userList.userList(1))
-            }
-            "currentUser should be first element of userList" in {
-                userList.setNextUser
-                userList.currentUser should be(userList.userList(0))
-            }
-        }
-    }
-
-    "An UserList" when {
-        "updateList is called" should {
-            val userList = UserList
-            userList.addUser("test1")
-            userList.initialize
-
-        }
-    }
-
-}
-*/
