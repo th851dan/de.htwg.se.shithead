@@ -6,6 +6,14 @@ object Controller {
   //status
   var status: Int = 0
 
+  def checkList(list: List[Int]): Boolean = {
+    var b:Boolean = true
+    list.foreach(u => if(UserList.currentUser.userCardStackHand.length - 1 < u) b = false else if(UserList.currentUser.emptyHand()) if(UserList.currentUser.stackTable.length - 1 < u) b = false)
+    b
+  }
+
+  def getCard(i: Int): String = UserList.currentUser.getCard(i).toString
+
   def buildAll(b: Boolean): String = {
     val sb = new StringBuilder()
     for (u <- UserList userList)
@@ -41,7 +49,7 @@ object Controller {
 
   def getUserListLength(): Int = UserList.userListLength()
 
-  def begin():Unit = UserList.initialize()
+  def begin(): Unit = UserList.initialize()
 
   def build(b: Boolean): String = build(getCurrentUser(), b)
 
@@ -53,11 +61,13 @@ object Controller {
 
   def setState(status: Int): Unit = this.status = status
 
-  def setNextUser() = UserList.setNextUser()
+  def setNextUser() =  UserList.setNextUser()
 
   def changeCards(card1: Int, card2: Int): String = UserList.switchCards(card1 - 1, card2 - 1)
 
   def compareToStartUser(): Boolean = getCurrentUser.equals(UserList.userList(0))
+
+  def getCurrentUser(): User = UserList.currentUser
 
   def getTurn(): String = getCurrentUserName + " It's your turn: "
 
@@ -66,8 +76,6 @@ object Controller {
   def playCard(list: List[Int]): Boolean = CardStack.playCard(list)
 
   def getPlayedCard(): String = CardStack.tableStack.cardStack.head.toString
-
-  def getCurrentUser(): User = UserList.currentUser
 
   def getRank(): Int = UserList.getRank()
 
