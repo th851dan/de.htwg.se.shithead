@@ -45,5 +45,24 @@ class UserListSpec extends WordSpec with Matchers {
                 userList.userList.contains(user) should be(false)
             }
         }
+        "setNextUser is called" should {
+            "update currentUser to next user" in {
+                userList.setNextUser
+                userList.currentUser should be(userList.userList(1))
+            }
+            "update currentUser to first user in userList when end of list is reachd" in {
+                userList.setNextUser
+                userList.currentUser should be(userList.userList(0))
+            }
+        }
+        "switchCards is called" should {
+            "switch card on table with card in hand of currentUser" in {
+                val cardHand = userList.currentUser.userCardStackHand(0)
+                val cardTable = userList.currentUser.userCardStackTable(0)
+                userList.switchCards(0, 0)
+                userList.currentUser.userCardStackHand.contains(cardTable) should be(true)
+                userList.currentUser.userCardStackTable.contains(cardHand) should be(true)
+            }
+        }
     }
 }

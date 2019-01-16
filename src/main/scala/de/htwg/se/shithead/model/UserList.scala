@@ -11,7 +11,7 @@ object UserList {
 
   def addUser(name: String): Boolean = isValid(name) match {
     case false => {
-      userList = new User(name,List(),List()) :: userList
+      userList = userList ::: List(new User(name,List(),List()))
       fullUserListLength = fullUserListLength + 1
       true
     }
@@ -64,7 +64,7 @@ object UserList {
       val cardT = currentUser.userCardStackTable(c2)
       currentUser = currentUser.removeHand(cardH)
       currentUser = currentUser.removeTable(cardT)
-      currentUser = currentUser addHand (cardT)
+      currentUser = currentUser.addHand (cardT)
       currentUser = currentUser.addTable(cardH)
       userList = updateList(currentUser)
       "Success\n"
