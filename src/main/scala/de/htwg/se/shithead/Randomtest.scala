@@ -10,13 +10,16 @@ object Randomtest {
     Tui.eval("add user peter")
     Tui.eval("start game")
     Tui.eval("y 1 1")
-    Tui.eval("y 1 1")
     Tui.eval("n")
     Tui.eval("n")
-
     Tui.eval("play 1")
+    Tui.eval("play 2")
+    Tui.eval("play 2")
+    Tui.eval("play 3")
+    Tui.eval("play 3")
+    Tui.eval("play 2")
     Tui.eval("play 1")
-    println(CardStack.tableStack)
-
+    Tui.eval("play 3")
+    Tui.eval("play 2")
   }
 }

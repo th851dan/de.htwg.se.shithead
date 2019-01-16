@@ -24,7 +24,7 @@ object Tui {
       val splitted = line.split("\\s+")
       splitted(0) = splitted(0).toLowerCase
       splitted(0) match {
-        case "y" => answerYes(splitted(1) toInt, splitted(2) toInt)
+        case "y" => answerYes(splitted(1) toInt, (splitted(2) toInt))
         case "n" => answerNo()
         case "start" => startGame()
         case "add" => println(newUser(splitted(2)))
@@ -38,11 +38,12 @@ object Tui {
       }
     } else println("wrong syntax\n")
   }
-
+  //TODO: Karte wird nicht vom Tablestack gelöscht
   def answerYes(id1: Int, id2: Int): Unit = if (Controller.getState() == 2) {
-      println(Controller.changeCards(id1, id2))
-      printUser()
-    }
+    println(Controller.changeCards(id1, id2))
+    show(true)
+    printUser()
+  }
 
   def answerNo(): Unit = Controller.getState() match {
     case 2 => {
@@ -53,12 +54,13 @@ object Tui {
         printUser()
       } else printUser()
     }
+    case _ => "Operation not available\n"
   }
 
   def newUser(name: String): String = Controller.getState() match {
     case 0 => {
-      if (Controller.getUserListLength() < 6) {
-        if (Controller add (name))
+      if (Controller.getUserListLength() < 5) {
+        if (Controller.add(name))
           "New user added: " + name + "\n"
         else
           "There is someone with the same name\n"
@@ -77,7 +79,7 @@ object Tui {
       } else {
         Controller.setState(1)
         println("Game starts: \n")
-        start
+        start()
         printUser()
       }
     }
@@ -85,7 +87,7 @@ object Tui {
   }
 
   def printUser(): Unit = Controller.getState() match {
-      case 2 => println(Controller.getCurrentUserName + " Do you want to swap cards? y ID1 ID2 (1-3) \n")
+      case 2 => println(Controller.getCurrentUserName + " Do you want to swap cards? y ID1 ID2 (1-3) / n")
       case 3 => Controller.currentUserHasHand() match {
         case true => show(false)
         case false => show(true)
@@ -96,14 +98,18 @@ object Tui {
   def playCard(list: List[Int]): String = {
     Controller.getState() match {
       case 3 => {
-        if (Controller.playCard(list)) {
-              println("Played: " + Controller.getPlayedCard() +
-                "  Amount: " + list.length + "\n")
-              printUser()
-        } else {
-          println("Unlucky you! You have to pickup the cards")
-        }
-        "It's your turn!\n"
+        if(Controller.checkList(list)) {
+          if (Controller.playCard(list)) {
+            println("Played: " + Controller.getPlayedCard() +
+              "  Amount: " + list.length + "\n")
+            printUser()
+          } else {
+            println("Unlucky you! You have to pickup the cards")
+            printUser()
+          }
+          "It's your turn!\n"
+        } else
+          "No legit number :( Try again! \n"
       }
       case _ =>"Operation not available\n"
       }
