@@ -3,7 +3,7 @@ package de.htwg.se.shithead.model
 import org.scalatest._
 
 class UserListSpec extends WordSpec with Matchers {
-    "An UserList" when {
+   /* "An UserList" when {
         val userList = UserList
         userList.addUser("test1")
         userList.initialize
@@ -64,5 +64,5 @@ class UserListSpec extends WordSpec with Matchers {
                 userList.currentUser.userCardStackTable.contains(cardHand) should be(true)
             }
         }
-    }
+    }*/
 }
