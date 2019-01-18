@@ -1,14 +1,14 @@
-package de.htwg.se.shithead.controller.commands
+package de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.commands
 
 import de.htwg.se.shithead.Util.Command
-import de.htwg.se.shithead.controller.Controller
-import de.htwg.se.shithead.model.{CardStack, User, UserList}
+import de.htwg.se.shithead.controller.ControllerInterface
+import de.htwg.se.shithead.model.{CardStackInterface, User, UserListInterface}
 import de.htwg.se.shithead.controller.GameState._
 
-class playCommand(controller: Controller, list2: List[Int]) extends Command{
+class playCommand(controller: ControllerInterface, list2: List[Int]) extends Command{
 
-  var usLi: UserList = controller.userList
-  var caSt: CardStack = controller.cardStack
+  var usLi: UserListInterface = controller.userList
+  var caSt: CardStackInterface = controller.cardStack
   var state:Status = controller.status
 
   override def doStep(): Unit = {

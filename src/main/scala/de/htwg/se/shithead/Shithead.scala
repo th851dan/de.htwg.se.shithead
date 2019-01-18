@@ -1,7 +1,9 @@
 package de.htwg.se.shithead
 
-import de.htwg.se.shithead.controller.{CellChanged, Controller}
+import de.htwg.se.shithead.controller.CellChanged
+import de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.Controller
 import de.htwg.se.shithead.model._
+import de.htwg.se.shithead.model.baseImp._
 import de.htwg.se.shithead.view.Gui.Gui
 import de.htwg.se.shithead.view.Tui
 

@@ -1,14 +1,15 @@
-package de.htwg.se.shithead.controller.commands
+package de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.commands
 
 import de.htwg.se.shithead.Util.Command
 import de.htwg.se.shithead.controller._
 import de.htwg.se.shithead.model._
 import de.htwg.se.shithead.controller.GameState._
+import de.htwg.se.shithead.model.baseImp.UserList
 
-class iniCommand(controller: Controller) extends Command{
+class iniCommand(controller: ControllerInterface) extends Command{
 
-  var cS:CardStack = controller.cardStack
-  var uL:UserList = controller.userList
+  var cS:CardStackInterface = controller.cardStack
+  var uL:UserListInterface = controller.userList
   var state:Status = controller.status
 
 

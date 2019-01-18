@@ -1,12 +1,13 @@
-package de.htwg.se.shithead.controller.commands
+package de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.commands
 
 import de.htwg.se.shithead.Util.Command
-import de.htwg.se.shithead.controller.Controller
-import de.htwg.se.shithead.model.UserList
+import de.htwg.se.shithead.controller.ControllerInterface
+import de.htwg.se.shithead.model.UserListInterface
+import de.htwg.se.shithead.model.baseImp.UserList
 
-class setNextUserCommand(controller: Controller) extends Command{
+class setNextUserCommand(controller: ControllerInterface) extends Command{
 
-  var uL:UserList = controller.userList
+  var uL:UserListInterface = controller.userList
 
   override def doStep(): Unit = {
     uL = controller.userList

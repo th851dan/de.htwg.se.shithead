@@ -1,12 +1,11 @@
 package de.htwg.se.shithead.view
 
-import de.htwg.se.shithead.controller.{CellChanged, Controller, GameState}
+import de.htwg.se.shithead.controller.{CellChanged, ControllerInterface, GameState}
 import de.htwg.se.shithead.controller.GameState._
-import de.htwg.se.shithead.Util.Observer
 
 import scala.swing.Reactor
 
-class Tui(controller: Controller) extends Reactor{
+class Tui(controller: ControllerInterface) extends Reactor{
 
   listenTo(controller)
 

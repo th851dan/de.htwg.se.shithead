@@ -1,7 +1,10 @@
-package de.htwg.se.shithead.model
-import util.control.Breaks._
+package de.htwg.se.shithead.model.baseImp
 
-case class UserList(userList: List[User], currentUser: User) {
+import de.htwg.se.shithead.model.{Card, User, UserListInterface}
+
+import scala.util.control.Breaks.{break, breakable}
+
+case class UserList(userList: List[User], currentUser: User) extends UserListInterface{
 
   def userListLength(): Int = userList.length
 

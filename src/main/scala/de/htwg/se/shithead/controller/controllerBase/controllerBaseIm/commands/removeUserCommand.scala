@@ -1,12 +1,14 @@
-package de.htwg.se.shithead.controller.commands
+package de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.commands
 
 import de.htwg.se.shithead.Util.Command
-import de.htwg.se.shithead.controller.Controller
-import de.htwg.se.shithead.model.UserList
+import de.htwg.se.shithead.controller.ControllerInterface
 import de.htwg.se.shithead.controller.GameState._
+import de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.Controller
+import de.htwg.se.shithead.model.UserListInterface
+import de.htwg.se.shithead.model.baseImp.UserList
 
-class removeUserCommand(name:String, controller:Controller) extends Command{
-  var uL:UserList = controller.userList
+class removeUserCommand(name:String, controller:ControllerInterface) extends Command{
+  var uL:UserListInterface = controller.userList
   var removed:Boolean = false
 
   override def doStep(): Unit = {

@@ -7,4 +7,3 @@ case class Card(rank: Rank,
 
   override def toString: String = "Card: " + suite + " " + rank
 }
-

@@ -1,13 +1,15 @@
-package de.htwg.se.shithead.controller.commands
+package de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.commands
 
 import de.htwg.se.shithead.Util.Command
-import de.htwg.se.shithead.controller.Controller
-import de.htwg.se.shithead.model.UserList
+import de.htwg.se.shithead.controller.ControllerInterface
 import de.htwg.se.shithead.controller.GameState._
+import de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.Controller
+import de.htwg.se.shithead.model.UserListInterface
+import de.htwg.se.shithead.model.baseImp.UserList
 
-class changeCardCommand(card1: Int, card2: Int,controller: Controller)extends Command{
+class changeCardCommand(card1: Int, card2: Int,controller: ControllerInterface)extends Command{
 
-  var uL:UserList = controller.userList
+  var uL:UserListInterface = controller.userList
   var changed:Boolean = true
   var state: Status = controller.status
 

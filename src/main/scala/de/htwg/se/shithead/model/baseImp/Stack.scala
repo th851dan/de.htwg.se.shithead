@@ -1,8 +1,10 @@
-package de.htwg.se.shithead.model
+package de.htwg.se.shithead.model.baseImp
+
+import de.htwg.se.shithead.model.{Card, StackInterface}
 
 import scala.util.Random
 
-case class Stack(cards: List[Card], isValid: Boolean) {
+case class Stack(cards: List[Card], isValid: Boolean) extends StackInterface{
 
   val cardStack: List[Card] = if (isValidStack(cards) && isValid || !isValid) cards else throw new RuntimeException("Stack is invalid")
 

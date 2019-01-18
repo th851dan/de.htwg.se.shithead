@@ -1,10 +1,10 @@
-package de.htwg.se.shithead.controller.commands
+package de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.commands
 
 import de.htwg.se.shithead.Util.Command
-import de.htwg.se.shithead.controller.Controller
+import de.htwg.se.shithead.controller.ControllerInterface
 import de.htwg.se.shithead.controller.GameState._
 
-class compareUserCommand(controller:Controller) extends Command {
+class compareUserCommand(controller:ControllerInterface) extends Command {
   var state: Status = controller.status
 
   override def doStep(): Unit = {

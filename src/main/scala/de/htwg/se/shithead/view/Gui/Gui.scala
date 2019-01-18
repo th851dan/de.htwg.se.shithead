@@ -2,13 +2,13 @@ package de.htwg.se.shithead.view.Gui
 
 import java.text.NumberFormat
 
-import de.htwg.se.shithead.controller.{CellChanged, Controller, GameState}
+import de.htwg.se.shithead.controller.{CellChanged, ControllerInterface, GameState}
 
 import scala.swing._
 import scala.swing.event._
 import de.htwg.se.shithead.controller.GameState._
 
-class Gui(controller: Controller) extends Frame {
+class Gui(controller: ControllerInterface) extends Frame {
 
   listenTo(controller)
   title = "Shithead"

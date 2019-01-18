@@ -1,8 +1,8 @@
-package de.htwg.se.shithead.model
+package de.htwg.se.shithead.model.baseImp
 
-import scala.util.Random
+import de.htwg.se.shithead.model.{Card, CardStackInterface, User}
 
-case class CardStack(cardStack: Stack, tableStack: Stack, reverse:Boolean, valid: Boolean) {
+case class CardStack(cardStack: Stack, tableStack: Stack, reverse:Boolean, valid: Boolean) extends CardStackInterface{
 
   def deleteTableStack(): CardStack = copy(cardStack, tableStack.delete(), false, valid)
 
