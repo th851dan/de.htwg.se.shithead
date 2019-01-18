@@ -5,7 +5,9 @@ import de.htwg.se.shithead.controller.commands._
 import de.htwg.se.shithead.model.{CardStack, User, UserList}
 import de.htwg.se.shithead.controller.GameState._
 
-class Controller(var userList:UserList, var cardStack:CardStack) extends Observable {
+import scala.swing.Publisher
+
+class Controller(var userList:UserList, var cardStack:CardStack) extends Publisher {
 
   private val undoManager = new UndoManage
   var status: Status = BEFORESTART
@@ -16,46 +18,46 @@ class Controller(var userList:UserList, var cardStack:CardStack) extends Observa
   def remove(name: String): Boolean = if (status == BEFORESTART && userList.userListLength() != 0) {
       val command: removeUserCommand = new removeUserCommand(name, this)
       undoManager.doStep(command)
-      if(command.removed) notifyObservers
+      if(command.removed) publish(new CellChanged)
       command.removed
     } else false
 
   def add(name: String): Boolean = if(status == BEFORESTART) {
       val command: addUserCommand = new addUserCommand(name, this);
       undoManager.doStep(command)
-      notifyObservers
+      publish(new CellChanged)
       command.added
     } else false
 
   def playCard(list2: List[Int]): Boolean = if(status == DURINGGAME) {
       val command: playCommand = new playCommand(this, list2)
       undoManager.doStep(command)
-      notifyObservers
+      publish(new CellChanged)
       true
     } else false
 
   def begin(): Boolean = if(status == BEFORESTART && userList.userListLength() >= 2) {
     undoManager.doStep(new iniCommand(this))
-    notifyObservers
+    publish(new CellChanged)
     true
   } else false
 
   def setNextUser(): Unit = if(status == BEGIN) {
     undoManager.doStep(new setNextUserCommand(this))
-    if(!(userCount >= userList.userListLength()- 1))notifyObservers
+    if(!(userCount >= userList.userListLength()- 1)) publish(new CellChanged)
     userCount += 1
   }
 
   def changeCards(card1: Int, card2: Int): Boolean = if(status == BEGIN) {
     val command:changeCardCommand = new changeCardCommand(card1 - 1, card2 - 1,this)
     undoManager.doStep(command)
-    if(command.changed) notifyObservers
+    if(command.changed) publish(new CellChanged)
     command.changed
   } else false
 
   def compareToStartUser(): Unit = {
     undoManager.doStep(new compareUserCommand(this))
-    if(status != BEGIN) notifyObservers()
+    if(status != BEGIN) publish(new CellChanged)
   }
 
 
@@ -112,14 +114,13 @@ class Controller(var userList:UserList, var cardStack:CardStack) extends Observa
 
   def currentUserHasHand(): Boolean = this.getCurrentUser.userCardStackHand.length > 2
 
-
   def undo(): Unit = {
     undoManager.undoStep
-    notifyObservers
+    publish(new CellChanged)
   }
 
   def redo(): Unit = {
     undoManager.redoStep
-    notifyObservers
+    publish(new CellChanged)
   }
 }

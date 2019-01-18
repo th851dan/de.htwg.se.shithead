@@ -1,13 +1,14 @@
 package de.htwg.se.shithead.view
 
-import de.htwg.se.shithead.controller.GameState
+import de.htwg.se.shithead.controller.{CellChanged, Controller, GameState}
 import de.htwg.se.shithead.controller.GameState._
 import de.htwg.se.shithead.Util.Observer
-import de.htwg.se.shithead.controller.Controller
 
-class Tui(controller: Controller) extends Observer{
+import scala.swing.Reactor
 
-  controller.add(this)
+class Tui(controller: Controller) extends Reactor{
+
+  listenTo(controller)
 
   def matches(line: String): Boolean = line.toLowerCase.matches("((\\s)*y(\\s)+[123](\\s)+[123](\\s)*)|((\\s)*n(\\s)*)|((\\s)*(add)(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|" +
       "((\\s)*start(\\s)+game(\\s)*)|" +
@@ -44,7 +45,11 @@ class Tui(controller: Controller) extends Observer{
 
   def showAll(b: Boolean): Unit = println(controller.buildAll(b))
 
-  override def update(): Boolean = controller.status match {
+  reactions += {
+    case event:CellChanged => printTui()
+  }
+
+  def printTui(): Boolean = controller.status match {
     case BEFORESTART => {
       println(GameState.answer(BEFORESTART))
       true

@@ -1,7 +1,8 @@
 package de.htwg.se.shithead
 
-import de.htwg.se.shithead.controller.Controller
+import de.htwg.se.shithead.controller.{CellChanged, Controller}
 import de.htwg.se.shithead.model._
+import de.htwg.se.shithead.view.Gui.Gui
 import de.htwg.se.shithead.view.Tui
 
 import scala.io.StdIn.readLine
@@ -14,6 +15,7 @@ object Shithead {
     val userList:UserList = new UserList(List(), new User("s",List(),List())) // falls irgendwas mit currentuser = s auftaucht hier ändern
     val con:Controller = new Controller(userList,stack)
     val tui:Tui = new Tui(con)
+    val gui:Gui = new Gui(con)
 
 
     var input: String = ""
