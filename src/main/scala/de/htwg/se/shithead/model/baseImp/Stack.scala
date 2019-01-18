@@ -1,6 +1,6 @@
 package de.htwg.se.shithead.model.baseImp
 
-import de.htwg.se.shithead.model.{Card, StackInterface}
+import de.htwg.se.shithead.model._
 
 import scala.util.Random
 

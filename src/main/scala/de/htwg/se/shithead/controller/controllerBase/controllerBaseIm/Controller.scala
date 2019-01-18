@@ -1,5 +1,6 @@
 package de.htwg.se.shithead.controller.controllerBase.controllerBaseIm
 
+import com.google.inject.Inject
 import de.htwg.se.shithead.Util._
 import de.htwg.se.shithead.controller.GameState._
 import de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.commands._
@@ -8,7 +9,7 @@ import de.htwg.se.shithead.model.{CardStackInterface, User, UserListInterface}
 
 import scala.swing.Publisher
 
-class Controller(var userList:UserListInterface, var cardStack:CardStackInterface) extends ControllerInterface with Publisher {
+class Controller @Inject() (var userList:UserListInterface, var cardStack:CardStackInterface) extends ControllerInterface with Publisher {
 
   private val undoManager = new UndoManage
   var status: Status = BEFORESTART
