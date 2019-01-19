@@ -22,17 +22,18 @@ class CardStackSpec extends WordSpec with Matchers {
     }
 
     "default constructed and cards added and removed" should {
-      var cardStack = new CardStack(getCards(true),new Stack(List(),false),false, true)
 
       "remove cards from cardstack to tablestack" in {
+        var cardStack = new CardStack(getCards(true),new Stack(List(),false),false, true)
         var tuple = cardStack.pullFromTopCardStack()
         cardStack = tuple._1
         cardStack = cardStack.addToTopTableStack(tuple._2)
-        cardStack.tableStack.isEmpty should be(false)
+        cardStack.tableStack.cardStack.length should be(1)
         cardStack.cardStack.cardStack.length should be(51)
       }
 
       "delete TableStack" in {
+        var cardStack = new CardStack(getCards(true),new Stack(List(),false),false, true)
         var tuple = cardStack.pullFromTopCardStack()
         cardStack = tuple._1
         cardStack = cardStack.addToTopTableStack(tuple._2)
