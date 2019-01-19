@@ -20,16 +20,16 @@ class UserListSpec extends WordSpec with Matchers {
     }
 
     "add user " should {
-      val userList = new UserList()
-      userList.addUser("Hans")
+      var userList = new UserList()
+      userList = userList.addUser("Hans")
       "user be added" in {
         userList.userList.isEmpty should be(false)
       }
     }
 
     "remove user" should {
-      val notEmpty = new UserList(List(new User("Hans", List(),List()),new User("Peter", List(),List())),new User("Hans", List(),List()))
-      notEmpty.removeUser("Hans")
+      var notEmpty = new UserList(List(new User("Hans", List(),List()),new User("Peter", List(),List())),new User("Hans", List(),List()))
+      notEmpty = notEmpty.removeUser("Hans")
       "be" in {
         notEmpty.userListLength() should be(1)
       }
