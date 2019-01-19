@@ -15,7 +15,7 @@ class UndoManage {
       undoStack = stack
       redoStack = head :: redoStack
     }
-    case Nil =>
+    case _ =>
   }
 
   def redoStep(): Unit = redoStack match {
@@ -24,6 +24,6 @@ class UndoManage {
       redoStack = stack
       undoStack = head :: undoStack
     }
-    case Nil =>
+    case _ =>
   }
 }
