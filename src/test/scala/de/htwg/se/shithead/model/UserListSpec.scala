@@ -15,7 +15,7 @@ class UserListSpec extends WordSpec with Matchers {
         userList.currentUser should be(new User("",List(),List()))
       }
 
-      "with parameter be" in {
+      "with parameter be the list with the added users" in {
         val notEmpty = new UserList(List(new User("Hans", List(),List()),new User("Peter", List(),List())),new User("Hans", List(),List()))
         notEmpty.userList should be (List(new User("Hans", List(),List()),new User("Peter", List(),List())))
         notEmpty.currentUser should be (new User("Hans", List(),List()))
@@ -35,7 +35,7 @@ class UserListSpec extends WordSpec with Matchers {
     "remove user" should {
       var notEmpty = new UserList(List(new User("Hans", List(),List()),new User("Peter", List(),List())),new User("Hans", List(),List()))
       notEmpty = notEmpty.removeUser("Hans")
-      "be" in {
+      "user get removed" in {
         notEmpty.userListLength() should be(1)
       }
     }
@@ -43,7 +43,7 @@ class UserListSpec extends WordSpec with Matchers {
     "switch cards " should{
       var notEmpty = new UserList(List(new User("Hans", List(card),List(card2)),new User("Peter", List(),List())),new User("Hans", List(card),List(card2)))
       notEmpty = notEmpty.switchCards(0,0)
-      "cards from hand to cards on table" in {
+      "switch cards from hand to cards on table" in {
         notEmpty.currentUser.userCardStackTable(0) should be(card)
         notEmpty.currentUser.userCardStackHand(0) should be(card2)
       }
@@ -52,7 +52,7 @@ class UserListSpec extends WordSpec with Matchers {
     "updateList " should {
       var notEmpty = new UserList(List(new User("Hans", List(),List()),new User("Peter", List(),List())),new User("Hans", List(),List()))
       notEmpty = notEmpty.updateList(new User("Hans", List(card), List(card2)))
-      "update the exsisting user to new User" in {
+      "update the exsisting user to the new user" in {
         notEmpty.currentUser.emptyHand() should be(false)
       }
     }

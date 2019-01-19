@@ -30,5 +30,5 @@ case class User(name: String, stackHand: List[Card], stackTable: List[Card]) {
     case false => userCardStackHand(id)
   }
 
-  def emptyHand(): Boolean = userCardStackHand == 0
+  def emptyHand(): Boolean = userCardStackHand.isEmpty
 }

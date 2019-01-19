@@ -10,7 +10,7 @@ class UserSpec extends WordSpec with Matchers {
 
     "constructed without parameter" should {
       val user = new User("Hans", List(), List())
-      "with name and emptylists" in {
+      "have name and emptylists" in {
         user.name should be("Hans")
         user.stackTable.isEmpty should be(true)
         user.stackHand.isEmpty should be(true)
@@ -35,7 +35,7 @@ class UserSpec extends WordSpec with Matchers {
     "remove from hand " should {
       var user = new User("Hans", List(card), List(card2))
       user = user.removeHand(card)
-      "with name and list with card two spade true" in {
+      "with name and list with card three spade true" in {
         user.getCard(0) should be (card2)
       }
     }
