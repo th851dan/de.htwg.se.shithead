@@ -5,31 +5,33 @@ import org.scalatest._
 
 class UserListSpec extends WordSpec with Matchers {
   "A UserList" when {
-    val userList = new UserList()
-    val notEmpty = new UserList(List(new User("Hans", List(),List()),new User("Peter", List(),List())),new User("Hans", List(),List()))
     "constructed " should {
 
       "without parameter be empty" in {
+        val userList = new UserList()
         userList.userList should be(List())
         userList.currentUser should be(new User("",List(),List()))
       }
       "with parameter be" in {
+        val notEmpty = new UserList(List(new User("Hans", List(),List()),new User("Peter", List(),List())),new User("Hans", List(),List()))
         notEmpty.userList should be (List(new User("Hans", List(),List()),new User("Peter", List(),List())))
         notEmpty.currentUser should be (new User("Hans", List(),List()))
       }
     }
 
     "add user " should {
-      notEmpty.addUser("Hans")
+      val userList = new UserList()
+      userList.addUser("Hans")
       "user be added" in {
         userList.userList.isEmpty should be(false)
       }
     }
 
     "remove user" should {
+      val notEmpty = new UserList(List(new User("Hans", List(),List()),new User("Peter", List(),List())),new User("Hans", List(),List()))
       notEmpty.removeUser("Hans")
       "be" in {
-        userList.userListLength() should be(1)
+        notEmpty.userListLength() should be(1)
       }
     }
   }
