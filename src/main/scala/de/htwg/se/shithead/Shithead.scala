@@ -14,8 +14,8 @@ object Shithead {
     val injector = Guice.createInjector(new ShitHeadModule)
 
     val con = injector.getInstance(classOf[Controller])
-    val tui:Tui = new Tui(con)
-    val gui:Gui = new Gui(con)
+    val tui: Tui = new Tui(con)
+    val gui: Gui = new Gui(con)
 
 
     var input: String = ""

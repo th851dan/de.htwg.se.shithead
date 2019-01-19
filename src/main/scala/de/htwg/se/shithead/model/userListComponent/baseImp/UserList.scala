@@ -4,22 +4,20 @@ import de.htwg.se.shithead.model.{Card, User, UserListInterface}
 
 import scala.util.control.Breaks.{break, breakable}
 
-case class UserList(userList: List[User], currentUser: User) extends UserListInterface{
-  def this() = this(List(), User("",List(),List()))
+case class UserList(userList: List[User], currentUser: User) extends UserListInterface {
+  def this() = this(List(), User("", List(), List()))
 
-  def userListLength(): Int = userList.length
-
-  def addUser(name: String): UserList = copy(if(!isValid(name)) new User(name, List(), List()) :: userList else userList, currentUser)
-
-  def setCurrentUser(i: Int): UserList = copy(userList, userList(i))
-
-  def removeUser(name: String): UserList = copy(if(isValid(name)) userList.filter(_.name != name) else userList, currentUser)
+  def addUser(name: String): UserList = copy(if (!isValid(name)) new User(name, List(), List()) :: userList else userList, currentUser)
 
   private def isValid(name: String): Boolean = userList.exists(_.name == name)
 
-  def initialize(cardFalse:Card, cardHand:Card, cardTable:Card, user:User): UserList = {
-    var ul:UserList = this
-    for(_ <- 0 to 2) {
+  def setCurrentUser(i: Int): UserList = copy(userList, userList(i))
+
+  def removeUser(name: String): UserList = copy(if (isValid(name)) userList.filter(_.name != name) else userList, currentUser)
+
+  def initialize(cardFalse: Card, cardHand: Card, cardTable: Card, user: User): UserList = {
+    var ul: UserList = this
+    for (_ <- 0 to 2) {
       var u: User = user
       var card = cardHand
       card = card.setVisibility(true)
@@ -33,14 +31,8 @@ case class UserList(userList: List[User], currentUser: User) extends UserListInt
     ul
   }
 
-  def updateList(user: User): UserList = {
-    var list: List[User] = List()
-    userList.reverse.foreach(u => if (u.NAME == user.NAME) list = user :: list else list = u :: list)
-    copy(list, if(user.equals(currentUser)) user else currentUser)
-  }
-
   def setNextUser(): UserList = {
-    var user:User = currentUser
+    var user: User = currentUser
     breakable {
       for (List(left, right) <- userList.sliding(2)) {
         if (left.NAME.equals(currentUser.NAME)) {
@@ -56,21 +48,29 @@ case class UserList(userList: List[User], currentUser: User) extends UserListInt
     copy(userList, user)
   }
 
-  def getTrueTableCard(user: User, int: Int): Card = {
-    var list:List[Card] = List()
-    user.userCardStackTable.reverse.foreach(u => if(u.visibility == true)list = u :: list)
-    list(int)
-  }
+  def userListLength(): Int = userList.length
 
-  def switchCards(c1: Int, c2: Int): UserList = if(c1 <= 2 || c1 >= 0 || c2 <= 2 || c2 >= 0) {
-    var user:User = currentUser
+  def switchCards(c1: Int, c2: Int): UserList = if (c1 <= 2 || c1 >= 0 || c2 <= 2 || c2 >= 0) {
+    var user: User = currentUser
     val cardH = currentUser.userCardStackHand(c1)
     val cardT = getTrueTableCard(currentUser, c2)
     user = user.removeHand(cardH)
     user = user.removeTable(cardT)
-    user = user.addHand (cardT)
+    user = user.addHand(cardT)
     user = user.addTable(cardH)
     updateList(user)
   } else this
+
+  def updateList(user: User): UserList = {
+    var list: List[User] = List()
+    userList.reverse.foreach(u => if (u.NAME == user.NAME) list = user :: list else list = u :: list)
+    copy(list, if (user.equals(currentUser)) user else currentUser)
+  }
+
+  def getTrueTableCard(user: User, int: Int): Card = {
+    var list: List[Card] = List()
+    user.userCardStackTable.reverse.foreach(u => if (u.visibility == true) list = u :: list)
+    list(int)
+  }
 
 }

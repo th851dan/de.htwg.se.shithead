@@ -1,4 +1,4 @@
-package de.htwg.se.shithead.Util
+package de.htwg.se.shithead.util
 
 class UndoManage {
   private var undoStack: List[Command] = Nil
@@ -9,8 +9,8 @@ class UndoManage {
     command.doStep()
   }
 
-  def undoStep():Unit = undoStack match {
-    case head::stack => {
+  def undoStep(): Unit = undoStack match {
+    case head :: stack => {
       head.undoStep()
       undoStack = stack
       redoStack = head :: redoStack
@@ -18,12 +18,12 @@ class UndoManage {
     case Nil =>
   }
 
-  def redoStep():Unit = redoStack match {
+  def redoStep(): Unit = redoStack match {
     case head :: stack => {
       head.redoStep()
       redoStack = stack
       undoStack = head :: undoStack
-      }
+    }
     case Nil =>
   }
 }

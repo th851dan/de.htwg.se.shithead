@@ -41,28 +41,28 @@ class FileIO extends FileIOInterface {
     var li: List[Card] = List()
     for (s2 <- s \\ "card") {
       li = new Card(
-        getRank((s2  \ "@rank").toString()),
+        getRank((s2 \ "@rank").toString()),
         getSuite((s2 \ "@suite").toString()),
-        (s2 \"@visibility").toString().toBoolean) :: li
+        (s2 \ "@visibility").toString().toBoolean) :: li
     }
     li
   }
 
   def getUserList(seq: NodeSeq, seq1: NodeSeq): UserListInterface = new UserList(
     {
-      var list:List[User] = List()
+      var list: List[User] = List()
       for (s <- seq \\ "user") list = new User(
         (s \ "@name").toString,
         getCardList((s \\ "user" \\ "handStack")),
         getCardList((s \\ "user" \\ "tableStack"))) :: list
       list
     }
-    , new User((seq1 \ "@name").toString(), getCardList((seq1\\ "handStack")), getCardList((seq1\\ "tableStack")))
+    , new User((seq1 \ "@name").toString(), getCardList((seq1 \\ "handStack")), getCardList((seq1 \\ "tableStack")))
   )
 
   def getCardStack(seq: NodeSeq): CardStackInterface = new CardStack(
     new Stack(getCardList((seq \\ "stackAvailable")), (seq \\ "stackAvailable" \ "@isValid").toString.toBoolean),
-    new Stack(getCardList((seq \\ "cardStack" \\ "stackOnTable")), (seq \\"cardStack" \\"stackOnTable" \ "@isValid").toString.toBoolean),
+    new Stack(getCardList((seq \\ "cardStack" \\ "stackOnTable")), (seq \\ "cardStack" \\ "stackOnTable" \ "@isValid").toString.toBoolean),
     (seq \ "@reverse").toString.toBoolean, (seq \ "@valid").toString.toBoolean)
 
   override def load(): (CardStackInterface, UserListInterface) = {
@@ -85,10 +85,6 @@ class FileIO extends FileIOInterface {
   }
 
   def saveXml(userList: UserListInterface, cardStack: CardStackInterface) = scala.xml.XML.save("game.xml", bothToXml(cardStack, userList))
-
-  def cardToXml(card: Card) = {
-    <card rank={card.rank.toString} suite={card.suite.toString} visibility={card.visibility.toString}></card>
-  }
 
   def bothToXml(cardStack: CardStackInterface, userList: UserListInterface) = {
     <game>
@@ -126,5 +122,9 @@ class FileIO extends FileIOInterface {
         </users>}
       </list>}
     </game>
+  }
+
+  def cardToXml(card: Card) = {
+    <card rank={card.rank.toString} suite={card.suite.toString} visibility={card.visibility.toString}></card>
   }
 }

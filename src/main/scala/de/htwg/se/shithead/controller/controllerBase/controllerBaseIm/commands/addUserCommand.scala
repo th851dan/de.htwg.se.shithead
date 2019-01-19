@@ -1,6 +1,6 @@
 package de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.commands
 
-import de.htwg.se.shithead.Util.Command
+import de.htwg.se.shithead.util.Command
 import de.htwg.se.shithead.controller.ControllerInterface
 import de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.Controller
 import de.htwg.se.shithead.model.UserListInterface

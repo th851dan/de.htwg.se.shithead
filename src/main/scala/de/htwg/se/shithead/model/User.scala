@@ -11,13 +11,11 @@ case class User(name: String, stackHand: List[Card], stackTable: List[Card]) {
 
   def removeHand(card: Card): User = copy(NAME, remove(card, userCardStackHand), userCardStackTable)
 
-  private def remove(card: Card, list: List[Card]): List[Card] = list diff List(card)
-
   def addTable(card: Card): User = copy(NAME, userCardStackHand, card :: userCardStackTable)
 
   def removeTable(card: Card): User = copy(NAME, userCardStackHand, remove(card, userCardStackTable))
 
-  def emptyHand(): Boolean = userCardStackHand == 0
+  private def remove(card: Card, list: List[Card]): List[Card] = list diff List(card)
 
   override def equals(obj: Any): Boolean = obj.isInstanceOf[User] match {
     case true => if (obj.asInstanceOf[User].NAME.equals(this.NAME)) true else false
@@ -31,4 +29,6 @@ case class User(name: String, stackHand: List[Card], stackTable: List[Card]) {
     }
     case false => userCardStackHand(id)
   }
+
+  def emptyHand(): Boolean = userCardStackHand == 0
 }

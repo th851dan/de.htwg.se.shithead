@@ -46,9 +46,9 @@ class FileIO extends FileIOInterface {
   def loadList(result: JsLookupResult): List[Card] = {
     var list: List[Card] = List()
     for (r <- 0 to (result \ "size").as[Int] - 1)
-      list = (new Card(getRank(((result \"stack")(r) \ "rank").as[String]),
-        getSuite(((result \ "stack")(r)\"suite").as[String]),
-        (((result \ "stack")(r)\ "visibility").as[Boolean]))) :: list
+      list = (new Card(getRank(((result \ "stack") (r) \ "rank").as[String]),
+        getSuite(((result \ "stack") (r) \ "suite").as[String]),
+        (((result \ "stack") (r) \ "visibility").as[Boolean]))) :: list
     list
   }
 
@@ -59,7 +59,7 @@ class FileIO extends FileIOInterface {
 
   def loadListOfUsers(result: JsLookupResult): List[User] = {
     var list: List[User] = List()
-    for (i <- 0 to (result \ "size").as[Int] - 1) list = loadUser((result\"list" )(i)) :: list
+    for (i <- 0 to (result \ "size").as[Int] - 1) list = loadUser((result \ "list") (i)) :: list
     list
   }
 
@@ -119,7 +119,7 @@ class FileIO extends FileIOInterface {
 
   def getCardList(cardStack: List[Card]) = Json.obj(
     "size" -> (cardStack.length),
-    "stack" -> Json.toJson(for (card <- cardStack) yield Json.obj (
+    "stack" -> Json.toJson(for (card <- cardStack) yield Json.obj(
       "visibility" -> JsBoolean(card.visibility),
       "suite" -> JsString(card.suite.toString),
       "rank" -> JsString(card.rank.toString)

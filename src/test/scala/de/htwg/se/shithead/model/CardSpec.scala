@@ -1,7 +1,6 @@
 package de.htwg.se.shithead.model
 
-import com.google.inject.matcher.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.{Matchers, WordSpec}
 
 
 class CardSpec extends WordSpec with Matchers {

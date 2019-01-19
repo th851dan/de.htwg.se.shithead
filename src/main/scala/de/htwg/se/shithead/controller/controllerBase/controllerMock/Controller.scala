@@ -1,6 +1,6 @@
 package de.htwg.se.shithead.controller.controllerBase.controllerMock
 
-import de.htwg.se.shithead.Util._
+import de.htwg.se.shithead.util._
 import de.htwg.se.shithead.controller.GameState._
 import de.htwg.se.shithead.controller.{CellChanged, ControllerInterface}
 import de.htwg.se.shithead.model.{CardStackInterface, User, UserListInterface}

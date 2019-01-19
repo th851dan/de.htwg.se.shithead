@@ -3,27 +3,25 @@ package de.htwg.se.shithead.model.cardStackComponent.baseImp
 import de.htwg.se.shithead.model.stackComponent.baseImp.Stack
 import de.htwg.se.shithead.model.{Card, CardStackInterface, User}
 
-case class CardStack(cardStack: Stack, tableStack: Stack, reverse:Boolean, valid: Boolean) extends CardStackInterface{
+case class CardStack(cardStack: Stack, tableStack: Stack, reverse: Boolean, valid: Boolean) extends CardStackInterface {
 
   def deleteTableStack(): CardStack = copy(cardStack, tableStack.delete(), false, valid)
 
-  def addToTopCardStack(card: Card): CardStack = copy(cardStack.addToTop(card), tableStack, reverse,valid)
+  def addToTopCardStack(card: Card): CardStack = copy(cardStack.addToTop(card), tableStack, reverse, valid)
 
-  def addToTopCardStack(cardlist: List[Card]): CardStack = copy(cardStack.addToTop(cardlist), tableStack, reverse,valid)
+  def addToTopCardStack(cardlist: List[Card]): CardStack = copy(cardStack.addToTop(cardlist), tableStack, reverse, valid)
 
   def addToTopTableStack(card: Card): CardStack = copy(cardStack, tableStack, reverse, valid)
 
-  def addToTopTableStack(cardlist: List[Card]): CardStack = copy(cardStack, tableStack.addToTop(cardlist), reverse, valid)
-
   def shuffleCardStack(): CardStack = copy(cardStack.shuffle(), tableStack, reverse, valid)
 
-  def checkEquality(list: List[Int], user: User, card: Card): Boolean =  {
-    var b:Boolean = true
-    list.foreach(i => if (user.getCard(i).rank.value != card.rank.value) false )
+  def checkEquality(list: List[Int], user: User, card: Card): Boolean = {
+    var b: Boolean = true
+    list.foreach(i => if (user.getCard(i).rank.value != card.rank.value) false)
     b
   }
 
-  def checkListLength(user: User, length: Int): CardStack = if(valid) user.emptyHand() match {
+  def checkListLength(user: User, length: Int): CardStack = if (valid) user.emptyHand() match {
     case true => copy(cardStack, tableStack, reverse, user.userCardStackTable.length >= length)
     case false => copy(cardStack, tableStack, reverse, user.userCardStackHand.length + 3 >= length && cardStack.isEmpty() || user.userCardStackHand.length >= length)
   } else this
@@ -53,21 +51,16 @@ case class CardStack(cardStack: Stack, tableStack: Stack, reverse:Boolean, valid
     case false => card.rank.value
   }
 
-  private def removeCardsFromStack(user: User): (CardStack, User) = if (!valid) {
-    var u:User = user.addHand(tableStack.cardStack)
-    (copy(cardStack, tableStack.delete(), false, valid), u)
-  } else (this, user)
-
   def setValid(b: Boolean): CardStack = copy(cardStack, tableStack, reverse, b)
 
   def pullFromTopCardStack(): (CardStack, Card) = {
     val tuple = cardStack.pullFromTop
-    (copy(tuple._2,tableStack, reverse, valid) ,tuple._1)
+    (copy(tuple._2, tableStack, reverse, valid), tuple._1)
   }
 
   def playCard(list: List[Int], user: User): (CardStack, User) = if (valid) {
-    var us:User = user
-    var list2:List[Card] = List()
+    var us: User = user
+    var list2: List[Card] = List()
 
     if (user.getCard(list(0)).rank.value == 10 || list.length == 4) {
       list.foreach(i => us = removeCard(user.getCard(i), us))
@@ -81,6 +74,8 @@ case class CardStack(cardStack: Stack, tableStack: Stack, reverse:Boolean, valid
     }
   } else (this, user)
 
+  def addToTopTableStack(cardlist: List[Card]): CardStack = copy(cardStack, tableStack.addToTop(cardlist), reverse, valid)
+
   def removeCard(card: Card, user: User): User = {
     var us = user
     user.emptyHand() match {
@@ -91,5 +86,10 @@ case class CardStack(cardStack: Stack, tableStack: Stack, reverse:Boolean, valid
   }
 
   def getTopTableElement(): Card = tableStack.topElement()
+
+  private def removeCardsFromStack(user: User): (CardStack, User) = if (!valid) {
+    var u: User = user.addHand(tableStack.cardStack)
+    (copy(cardStack, tableStack.delete(), false, valid), u)
+  } else (this, user)
 
 }

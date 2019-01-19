@@ -12,7 +12,7 @@ trait UserListInterface {
 
   def removeUser(name: String): UserListInterface
 
-  def initialize(cardFalse:Card, cardHand:Card, cardTable:Card, user:User): UserListInterface
+  def initialize(cardFalse: Card, cardHand: Card, cardTable: Card, user: User): UserListInterface
 
   def updateList(user: User): UserListInterface
 
@@ -28,6 +28,7 @@ trait CardStackInterface {
   val tableStack: StackInterface
   val reverse: Boolean
   val valid: Boolean
+
   def deleteTableStack(): CardStackInterface
 
   def addToTopCardStack(card: Card): CardStackInterface
@@ -83,5 +84,5 @@ trait FileIOInterface {
 
   def load(): (CardStackInterface, UserListInterface)
 
-  def save(cardStack: CardStackInterface, userList: UserListInterface) : Unit
+  def save(cardStack: CardStackInterface, userList: UserListInterface): Unit
 }

@@ -2,7 +2,7 @@ package de.htwg.se.shithead.controller.controllerBase.controllerBaseIm
 
 import com.google.inject.{Guice, Inject}
 import de.htwg.se.shithead.ShitHeadModule
-import de.htwg.se.shithead.Util._
+import de.htwg.se.shithead.util._
 import de.htwg.se.shithead.controller.GameState._
 import de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.commands._
 import de.htwg.se.shithead.controller.{CellChanged, ControllerInterface}

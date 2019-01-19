@@ -1,4 +1,4 @@
-package de.htwg.se.shithead.Util
+package de.htwg.se.shithead.util
 
 trait Observer {
   def update(): Boolean
