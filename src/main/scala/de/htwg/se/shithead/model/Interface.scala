@@ -78,3 +78,10 @@ trait StackInterface {
   def delete(): StackInterface
 
 }
+
+trait FileIOInterface {
+
+  def load(): (CardStackInterface, UserListInterface)
+
+  def save(cardStack: CardStackInterface, userList: UserListInterface) : Unit
+}

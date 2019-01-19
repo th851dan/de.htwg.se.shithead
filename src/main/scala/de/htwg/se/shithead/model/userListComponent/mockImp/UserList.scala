@@ -1,4 +1,4 @@
-package de.htwg.se.shithead.model.mockImp
+package de.htwg.se.shithead.model.userListComponent.mockImp
 
 import de.htwg.se.shithead.model._
 

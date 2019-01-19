@@ -1,0 +1,299 @@
+{
+  "userList" : {
+    "currentUser" : {
+      "name" : "peter",
+      "tableStack" : {
+        "size" : 6,
+        "stack" : [ {
+          "visibility" : false,
+          "suite" : "Spade",
+          "rank" : "Two"
+        }, {
+          "visibility" : true,
+          "suite" : "Heart",
+          "rank" : "Two"
+        }, {
+          "visibility" : false,
+          "suite" : "Diamond",
+          "rank" : "Two"
+        }, {
+          "visibility" : true,
+          "suite" : "Spade",
+          "rank" : "Three"
+        }, {
+          "visibility" : false,
+          "suite" : "Club",
+          "rank" : "Three"
+        }, {
+          "visibility" : true,
+          "suite" : "Diamond",
+          "rank" : "Three"
+        } ]
+      },
+      "handStack" : {
+        "size" : 3,
+        "stack" : [ {
+          "visibility" : true,
+          "suite" : "Club",
+          "rank" : "Two"
+        }, {
+          "visibility" : true,
+          "suite" : "Heart",
+          "rank" : "Three"
+        }, {
+          "visibility" : true,
+          "suite" : "Spade",
+          "rank" : "Four"
+        } ]
+      }
+    },
+    "size" : 2,
+    "list" : [ {
+      "name" : "peter",
+      "tableStack" : {
+        "size" : 6,
+        "stack" : [ {
+          "visibility" : false,
+          "suite" : "Spade",
+          "rank" : "Two"
+        }, {
+          "visibility" : true,
+          "suite" : "Heart",
+          "rank" : "Two"
+        }, {
+          "visibility" : false,
+          "suite" : "Diamond",
+          "rank" : "Two"
+        }, {
+          "visibility" : true,
+          "suite" : "Spade",
+          "rank" : "Three"
+        }, {
+          "visibility" : false,
+          "suite" : "Club",
+          "rank" : "Three"
+        }, {
+          "visibility" : true,
+          "suite" : "Diamond",
+          "rank" : "Three"
+        } ]
+      },
+      "handStack" : {
+        "size" : 3,
+        "stack" : [ {
+          "visibility" : true,
+          "suite" : "Club",
+          "rank" : "Two"
+        }, {
+          "visibility" : true,
+          "suite" : "Heart",
+          "rank" : "Three"
+        }, {
+          "visibility" : true,
+          "suite" : "Spade",
+          "rank" : "Four"
+        } ]
+      }
+    }, {
+      "name" : "hans",
+      "tableStack" : {
+        "size" : 6,
+        "stack" : [ {
+          "visibility" : false,
+          "suite" : "Heart",
+          "rank" : "Four"
+        }, {
+          "visibility" : true,
+          "suite" : "Club",
+          "rank" : "Four"
+        }, {
+          "visibility" : false,
+          "suite" : "Spade",
+          "rank" : "Five"
+        }, {
+          "visibility" : true,
+          "suite" : "Heart",
+          "rank" : "Five"
+        }, {
+          "visibility" : false,
+          "suite" : "Diamond",
+          "rank" : "Five"
+        }, {
+          "visibility" : true,
+          "suite" : "Spade",
+          "rank" : "Six"
+        } ]
+      },
+      "handStack" : {
+        "size" : 3,
+        "stack" : [ {
+          "visibility" : true,
+          "suite" : "Diamond",
+          "rank" : "Four"
+        }, {
+          "visibility" : true,
+          "suite" : "Club",
+          "rank" : "Five"
+        }, {
+          "visibility" : true,
+          "suite" : "Heart",
+          "rank" : "Six"
+        } ]
+      }
+    } ]
+  },
+  "cardStack" : {
+    "valid" : true,
+    "reverse" : false,
+    "table" : {
+      "isValid" : false,
+      "cards" : {
+        "size" : 0,
+        "stack" : [ ]
+      }
+    },
+    "available" : {
+      "isValid" : true,
+      "cards" : {
+        "size" : 34,
+        "stack" : [ {
+          "visibility" : false,
+          "suite" : "Club",
+          "rank" : "Six"
+        }, {
+          "visibility" : false,
+          "suite" : "Diamond",
+          "rank" : "Six"
+        }, {
+          "visibility" : false,
+          "suite" : "Spade",
+          "rank" : "Seven"
+        }, {
+          "visibility" : false,
+          "suite" : "Heart",
+          "rank" : "Seven"
+        }, {
+          "visibility" : false,
+          "suite" : "Club",
+          "rank" : "Seven"
+        }, {
+          "visibility" : false,
+          "suite" : "Diamond",
+          "rank" : "Seven"
+        }, {
+          "visibility" : false,
+          "suite" : "Spade",
+          "rank" : "Eight"
+        }, {
+          "visibility" : false,
+          "suite" : "Heart",
+          "rank" : "Eight"
+        }, {
+          "visibility" : false,
+          "suite" : "Club",
+          "rank" : "Eight"
+        }, {
+          "visibility" : false,
+          "suite" : "Diamond",
+          "rank" : "Eight"
+        }, {
+          "visibility" : false,
+          "suite" : "Spade",
+          "rank" : "Nine"
+        }, {
+          "visibility" : false,
+          "suite" : "Heart",
+          "rank" : "Nine"
+        }, {
+          "visibility" : false,
+          "suite" : "Club",
+          "rank" : "Nine"
+        }, {
+          "visibility" : false,
+          "suite" : "Diamond",
+          "rank" : "Nine"
+        }, {
+          "visibility" : false,
+          "suite" : "Spade",
+          "rank" : "Ten"
+        }, {
+          "visibility" : false,
+          "suite" : "Heart",
+          "rank" : "Ten"
+        }, {
+          "visibility" : false,
+          "suite" : "Club",
+          "rank" : "Ten"
+        }, {
+          "visibility" : false,
+          "suite" : "Diamond",
+          "rank" : "Ten"
+        }, {
+          "visibility" : false,
+          "suite" : "Spade",
+          "rank" : "Jack"
+        }, {
+          "visibility" : false,
+          "suite" : "Heart",
+          "rank" : "Jack"
+        }, {
+          "visibility" : false,
+          "suite" : "Club",
+          "rank" : "Jack"
+        }, {
+          "visibility" : false,
+          "suite" : "Diamond",
+          "rank" : "Jack"
+        }, {
+          "visibility" : false,
+          "suite" : "Spade",
+          "rank" : "Queen"
+        }, {
+          "visibility" : false,
+          "suite" : "Heart",
+          "rank" : "Queen"
+        }, {
+          "visibility" : false,
+          "suite" : "Club",
+          "rank" : "Queen"
+        }, {
+          "visibility" : false,
+          "suite" : "Diamond",
+          "rank" : "Queen"
+        }, {
+          "visibility" : false,
+          "suite" : "Spade",
+          "rank" : "King"
+        }, {
+          "visibility" : false,
+          "suite" : "Heart",
+          "rank" : "King"
+        }, {
+          "visibility" : false,
+          "suite" : "Club",
+          "rank" : "King"
+        }, {
+          "visibility" : false,
+          "suite" : "Diamond",
+          "rank" : "King"
+        }, {
+          "visibility" : false,
+          "suite" : "Spade",
+          "rank" : "Ace"
+        }, {
+          "visibility" : false,
+          "suite" : "Heart",
+          "rank" : "Ace"
+        }, {
+          "visibility" : false,
+          "suite" : "Club",
+          "rank" : "Ace"
+        }, {
+          "visibility" : false,
+          "suite" : "Diamond",
+          "rank" : "Ace"
+        } ]
+      }
+    }
+  }
+}

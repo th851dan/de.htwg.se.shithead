@@ -136,7 +136,9 @@ class Gui(controller: ControllerInterface) extends Frame {
 
     contents += new Menu("file") {
       border = Swing.LineBorder(java.awt.Color.BLACK)
-      //TODO: AFTER FILEIO
+      contents += new MenuItem(Action("load") {controller.load})
+
+      contents += new MenuItem(Action("save") {controller.save})
     }
   }
 
@@ -201,6 +203,9 @@ class Gui(controller: ControllerInterface) extends Frame {
       controller.status = DURINGGAME
       true
     }
+    case _ =>
+     output.text = output.text + "\n " + GameState.answer(controller.status)
+      true
   }
 
   reactions += {

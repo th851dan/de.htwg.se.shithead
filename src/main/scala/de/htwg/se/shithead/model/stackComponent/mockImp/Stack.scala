@@ -1,4 +1,4 @@
-package de.htwg.se.shithead.model.mockImp
+package de.htwg.se.shithead.model.stackComponent.mockImp
 
 import de.htwg.se.shithead.model.{Card, Spade, StackInterface, Two}
 

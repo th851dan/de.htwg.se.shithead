@@ -4,7 +4,7 @@ import de.htwg.se.shithead.Util.Command
 import de.htwg.se.shithead.controller._
 import de.htwg.se.shithead.model._
 import de.htwg.se.shithead.controller.GameState._
-import de.htwg.se.shithead.model.baseImp.UserList
+import de.htwg.se.shithead.model.userListComponent.baseImp.UserList
 
 class iniCommand(controller: ControllerInterface) extends Command{
 

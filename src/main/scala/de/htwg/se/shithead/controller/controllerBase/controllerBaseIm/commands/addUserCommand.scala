@@ -4,7 +4,7 @@ import de.htwg.se.shithead.Util.Command
 import de.htwg.se.shithead.controller.ControllerInterface
 import de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.Controller
 import de.htwg.se.shithead.model.UserListInterface
-import de.htwg.se.shithead.model.baseImp.UserList
+import de.htwg.se.shithead.model.userListComponent.baseImp.UserList
 
 class addUserCommand(name:String, controller:ControllerInterface) extends Command{
   var uL:UserListInterface = controller.userList

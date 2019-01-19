@@ -5,7 +5,9 @@ import com.google.inject.name.Names
 import de.htwg.se.shithead.controller.ControllerInterface
 import de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.Controller
 import de.htwg.se.shithead.model._
-import de.htwg.se.shithead.model.baseImp.{CardStack, Stack, UserList}
+import de.htwg.se.shithead.model.cardStackComponent.baseImp.CardStack
+import de.htwg.se.shithead.model.stackComponent.baseImp.Stack
+import de.htwg.se.shithead.model.userListComponent.baseImp.UserList
 import net.codingwell.scalaguice.ScalaModule
 
 class ShitHeadModule extends AbstractModule with ScalaModule{
@@ -19,6 +21,8 @@ class ShitHeadModule extends AbstractModule with ScalaModule{
     bind[CardStackInterface].to[CardStack]
     bind[UserList].toInstance(new UserList(List(), User("", List(),List())))
     bind[CardStack].toInstance(new CardStack(getCards(true),getCards(false),false,true))
+
+    bind[FileIOInterface].to[fileIoComponent.fileToJsonImpl.FileIO]
   }
 
   def getCards(b:Boolean): Stack = {

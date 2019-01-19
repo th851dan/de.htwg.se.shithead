@@ -52,4 +52,9 @@ class Controller(var userList:UserListInterface, var cardStack:CardStackInterfac
 
   def redo(): Unit = {}
 
+  def save: Unit = {}
+
+  def load: Unit = {}
+
+
 }

@@ -1,11 +1,13 @@
 package de.htwg.se.shithead.controller.controllerBase.controllerBaseIm
 
-import com.google.inject.Inject
+import com.google.inject.{Guice, Inject}
+import de.htwg.se.shithead.ShitHeadModule
 import de.htwg.se.shithead.Util._
 import de.htwg.se.shithead.controller.GameState._
 import de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.commands._
 import de.htwg.se.shithead.controller.{CellChanged, ControllerInterface}
-import de.htwg.se.shithead.model.{CardStackInterface, User, UserListInterface}
+import de.htwg.se.shithead.model.fileIoComponent.fileToXmlImpl.FileIO
+import de.htwg.se.shithead.model.{CardStackInterface, FileIOInterface, User, UserListInterface}
 
 import scala.swing.Publisher
 
@@ -14,7 +16,8 @@ class Controller @Inject() (var userList:UserListInterface, var cardStack:CardSt
   private val undoManager = new UndoManage
   var status: Status = BEFORESTART
   var userCount:Int = 0
-
+  val injector = Guice.createInjector(new ShitHeadModule)
+  val fileIo:FileIOInterface = injector.getInstance(classOf[FileIOInterface])
 
   //Commands
   def remove(name: String): Boolean = if (status == BEFORESTART && userList.userListLength() != 0) {
@@ -25,7 +28,7 @@ class Controller @Inject() (var userList:UserListInterface, var cardStack:CardSt
     } else false
 
   def add(name: String): Boolean = if(status == BEFORESTART) {
-      val command: addUserCommand = new addUserCommand(name, this);
+      val command: addUserCommand = new addUserCommand(name, this)
       undoManager.doStep(command)
       publish(new CellChanged)
       command.added
@@ -123,6 +126,28 @@ class Controller @Inject() (var userList:UserListInterface, var cardStack:CardSt
 
   def redo(): Unit = {
     undoManager.redoStep
+    publish(new CellChanged)
+  }
+
+  private def getState(): Unit = {
+    if (userList.userList.isEmpty || cardStack.cardStack.cardStack.length == 52) {status = BEFORESTART}
+    else if (cardStack.cardStack.cardStack.length == (cardStack.cardStack.cardStack.length - 1 - (userList.userList.length - 1) * 9)) { status = GAMESTARTS}
+    else status = DURINGGAME
+  }
+
+  def save: Unit = {
+    fileIo.save(cardStack,userList)
+    status = SAVED
+    publish(new CellChanged)
+  }
+
+  def load: Unit = {
+    val tuple = fileIo.load()
+    cardStack = tuple._1
+    userList = tuple._2
+    status = LOADED
+    publish(new CellChanged)
+    getState()
     publish(new CellChanged)
   }
 

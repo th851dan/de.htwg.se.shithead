@@ -1,6 +1,5 @@
 name          := "shithead"
 organization  := "de.htwg.se"
-version       := "0.14.0"
 scalaVersion  := "2.12.7"
 
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.5"

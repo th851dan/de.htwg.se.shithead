@@ -1,6 +1,7 @@
-package de.htwg.se.shithead.model.mockImp
+package de.htwg.se.shithead.model.cardStackComponent.mockImp
 
 import de.htwg.se.shithead.model._
+import de.htwg.se.shithead.model.stackComponent.mockImp.Stack
 
 case class CardStack(cardStack: Stack, tableStack: Stack, reverse:Boolean, valid: Boolean) extends CardStackInterface{
 

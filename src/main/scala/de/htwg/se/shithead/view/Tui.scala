@@ -11,7 +11,7 @@ class Tui(controller: ControllerInterface) extends Reactor{
 
   def matches(line: String): Boolean = line.toLowerCase.matches("((\\s)*y(\\s)+[123](\\s)+[123](\\s)*)|((\\s)*n(\\s)*)|((\\s)*(add)(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|" +
       "((\\s)*start(\\s)+game(\\s)*)|" +
-      "((\\s)*play((\\s)+(\\d+\\s*){1,4}))|((\\s)*remove(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|((\\s)*q(\\s)*)|u|r")
+      "((\\s)*play((\\s)+(\\d+\\s*){1,4}))|((\\s)*remove(\\s)+user(\\s)+(\\w){2,20}(\\s)*)|((\\s)*q(\\s)*)|u|r|(load)|(save)")
 
   def eval(line: String) {
     if (matches(line)) {
@@ -35,6 +35,8 @@ class Tui(controller: ControllerInterface) extends Reactor{
         case "q" => println("Adios Amigos\n")
         case "r" => controller.redo()
         case "u" => controller.undo()
+        case "load" => controller.load
+        case "save" => controller.save
       }
     } else println("wrong syntax\n")
   }
@@ -99,5 +101,8 @@ class Tui(controller: ControllerInterface) extends Reactor{
       controller.status = DURINGGAME
       true
     }
+    case _ =>
+      println(GameState.answer(controller.status))
+      true
   }
 }

@@ -1,4 +1,4 @@
-package de.htwg.se.shithead.model.baseImp
+package de.htwg.se.shithead.model.userListComponent.baseImp
 
 import de.htwg.se.shithead.model.{Card, User, UserListInterface}
 

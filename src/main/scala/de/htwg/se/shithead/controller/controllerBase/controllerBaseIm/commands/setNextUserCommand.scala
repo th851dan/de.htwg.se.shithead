@@ -3,7 +3,7 @@ package de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.commands
 import de.htwg.se.shithead.Util.Command
 import de.htwg.se.shithead.controller.ControllerInterface
 import de.htwg.se.shithead.model.UserListInterface
-import de.htwg.se.shithead.model.baseImp.UserList
+import de.htwg.se.shithead.model.userListComponent.baseImp.UserList
 
 class setNextUserCommand(controller: ControllerInterface) extends Command{
 

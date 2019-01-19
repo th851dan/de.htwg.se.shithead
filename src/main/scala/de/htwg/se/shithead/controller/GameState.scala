@@ -3,7 +3,7 @@ package de.htwg.se.shithead.controller
 object GameState extends Enumeration {
 
   type Status = Value
-  val BEFORESTART,USERREMOVED,STARTGAME,BEGIN,GAMESTARTS,DURINGGAME,PICKEDUPCARDS,PLAYEDCARDS,FINISHED = Value
+  val BEFORESTART,USERREMOVED,STARTGAME,BEGIN,GAMESTARTS,DURINGGAME,PICKEDUPCARDS,PLAYEDCARDS,FINISHED,SAVED,LOADED,COUDNTLOAD = Value
   val map = Map[Status, String](
     BEFORESTART -> "new user added",
     STARTGAME -> "Game starts: ",
@@ -13,7 +13,10 @@ object GameState extends Enumeration {
     PICKEDUPCARDS -> "you have to pick up cards :(",
     PLAYEDCARDS -> "played card: ",
     FINISHED -> "GAMER OVER",
-    USERREMOVED -> "User removed."
+    USERREMOVED -> "User removed.",
+    SAVED -> "game save",
+    LOADED -> "game loaded",
+    COUDNTLOAD -> "couldn't load"
   )
 
   def answer(stat: Status): String = map(stat)

@@ -1,5 +1,6 @@
-package de.htwg.se.shithead.model.baseImp
+package de.htwg.se.shithead.model.cardStackComponent.baseImp
 
+import de.htwg.se.shithead.model.stackComponent.baseImp.Stack
 import de.htwg.se.shithead.model.{Card, CardStackInterface, User}
 
 case class CardStack(cardStack: Stack, tableStack: Stack, reverse:Boolean, valid: Boolean) extends CardStackInterface{

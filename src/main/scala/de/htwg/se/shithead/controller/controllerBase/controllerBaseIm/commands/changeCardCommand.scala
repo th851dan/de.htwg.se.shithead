@@ -5,7 +5,7 @@ import de.htwg.se.shithead.controller.ControllerInterface
 import de.htwg.se.shithead.controller.GameState._
 import de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.Controller
 import de.htwg.se.shithead.model.UserListInterface
-import de.htwg.se.shithead.model.baseImp.UserList
+import de.htwg.se.shithead.model.userListComponent.baseImp.UserList
 
 class changeCardCommand(card1: Int, card2: Int,controller: ControllerInterface)extends Command{
 
