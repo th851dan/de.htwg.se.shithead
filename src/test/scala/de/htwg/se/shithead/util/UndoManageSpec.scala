@@ -1,7 +1,6 @@
 package de.htwg.se.shithead.util
 
 import org.scalatest.{Matchers, WordSpec}
-import de.htwg.se.shithead.util.UndoManage
 
 class UndoManageSpec extends WordSpec with Matchers {
 

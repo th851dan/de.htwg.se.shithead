@@ -22,13 +22,15 @@ class UserListSpec extends WordSpec with Matchers {
       }
     }
 
-    "add user and setCurrentuser" should {
+    "add user and setCurrentuser and switch cards with wrong parameter" should {
       var userList = new UserList()
       userList = userList.addUser("Hans")
       userList = userList.setCurrentUser(0)
-      "user be added" in {
+      userList = userList.switchCards(10,10)
+      "user be added currentuser be set to username and switchcards should be the same" in {
         userList.userList.isEmpty should be(false)
         userList.currentUser should be(new User("Hans",List(),List()))
+        userList should be(userList)
       }
     }
 
@@ -54,6 +56,15 @@ class UserListSpec extends WordSpec with Matchers {
       notEmpty = notEmpty.updateList(new User("Hans", List(card), List(card2)))
       "update the exsisting user to the new user" in {
         notEmpty.currentUser.emptyHand() should be(false)
+      }
+    }
+
+    "setnextuser" should {
+      var notEmpty = new UserList(List(new User("Hans", List(),List()),new User("Peter", List(),List())),new User("Hans", List(),List()))
+      notEmpty = notEmpty.setNextUser()
+      notEmpty = notEmpty.setNextUser()
+      "set the user currentuser to the nex index user" in {
+        notEmpty.currentUser should be(notEmpty.userList(0))
       }
     }
   }
