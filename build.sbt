@@ -18,6 +18,9 @@ libraryDependencies += "com.typesafe.play" %% "play-json" % "2.6.6"
 
 enablePlugins(DockerPlugin)
 
+coverageEnabled := true
+coverageExcludedPackages := "de.htwg.se.shithead.view.gui.*;de.htwg.se.shithead.model.fileIoComponent.*;"
+
 dockerfile in docker := {
   val jarFile: File = sbt.Keys.`package`.in(Compile, packageBin).value
   val classpath = (managedClasspath in Compile).value
