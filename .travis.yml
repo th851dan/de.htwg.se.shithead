@@ -4,6 +4,7 @@ scala:
 branches:
   only:
     - development
+    - master
 script: 
   - "sbt clean coverage test"
 after_success: 
