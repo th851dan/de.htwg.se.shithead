@@ -115,7 +115,7 @@ class Controller @Inject() (var userList:UserListInterface, var cardStack:CardSt
 
   def getCurrentUserName(): String = userList.currentUser.NAME
 
-  def getPlayedCard(): String = cardStack.tableStack.cardStack.head.toString
+  def getPlayedCard(): String = if(!cardStack.tableStack.isEmpty())cardStack.tableStack.cardStack.head.toString else ""
 
   def currentUserHasHand(): Boolean = this.getCurrentUser.userCardStackHand.length > 2
 

@@ -20,9 +20,9 @@ class UndoManageSpec extends WordSpec with Matchers {
 
     "methods shouldnt do sth without step first" in {
       val c = new testCommand
-      undoManager.redoStep()
-      c.i should be('a')
       undoManager.undoStep()
+      c.i should be('a')
+      undoManager.redoStep()
       c.i should be('a')
 
     }

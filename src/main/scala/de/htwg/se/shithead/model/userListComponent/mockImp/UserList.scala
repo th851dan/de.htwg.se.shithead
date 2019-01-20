@@ -12,8 +12,6 @@ case class UserList(userList: List[User], currentUser: User) extends UserListInt
 
   def removeUser(name: String): UserList = this
 
-  def initialize(cardFalse: Card, cardHand: Card, cardTable: Card, user: User): UserList = this
-
   def updateList(user: User): UserList = this
 
   def setNextUser(): UserList = this

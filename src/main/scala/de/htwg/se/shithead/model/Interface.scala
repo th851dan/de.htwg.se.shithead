@@ -12,8 +12,6 @@ trait UserListInterface {
 
   def removeUser(name: String): UserListInterface
 
-  def initialize(cardFalse: Card, cardHand: Card, cardTable: Card, user: User): UserListInterface
-
   def updateList(user: User): UserListInterface
 
   def setNextUser(): UserListInterface

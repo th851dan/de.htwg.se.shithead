@@ -85,7 +85,7 @@ case class CardStack(cardStack: Stack, tableStack: Stack, reverse: Boolean, vali
     us
   }
 
-  def getTopTableElement(): Card = tableStack.topElement()
+  def getTopTableElement(): Card = if(!tableStack.isEmpty())tableStack.topElement() else throw new NoSuchElementException
 
   private def removeCardsFromStack(user: User): (CardStack, User) = if (!valid) {
     var u: User = user.addHand(tableStack.cardStack)

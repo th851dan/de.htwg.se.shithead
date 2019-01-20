@@ -15,22 +15,6 @@ case class UserList(userList: List[User], currentUser: User) extends UserListInt
 
   def removeUser(name: String): UserList = copy(if (isValid(name)) userList.filter(_.name != name) else userList, currentUser)
 
-  def initialize(cardFalse: Card, cardHand: Card, cardTable: Card, user: User): UserList = {
-    var ul: UserList = this
-    for (_ <- 0 to 2) {
-      var u: User = user
-      var card = cardHand
-      card = card.setVisibility(true)
-      u = user.addTable(card)
-      u = u.addTable(cardFalse)
-      card = cardTable
-      card = card.setVisibility(true)
-      u.addHand(card)
-      ul = ul.updateList(u)
-    }
-    ul
-  }
-
   def setNextUser(): UserList = {
     var user: User = currentUser
     breakable {
