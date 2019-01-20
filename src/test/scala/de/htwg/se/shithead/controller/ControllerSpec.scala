@@ -20,8 +20,6 @@ class ControllerSpec extends WordSpec with Matchers{
         controller.remove("hans") should be(true)
         controller.add("hans")
         controller.add("hans") should be(false)
-        controller.status = DURINGGAME
-        controller.remove("hans") should be(false)
       }
     }
 

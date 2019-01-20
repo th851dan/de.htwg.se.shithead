@@ -23,7 +23,7 @@ case class CardStack(cardStack: Stack, tableStack: Stack, reverse: Boolean, vali
 
   def checkListLength(user: User, length: Int): CardStack = if (valid) user.emptyHand() match {
     case true => copy(cardStack, tableStack, reverse, user.userCardStackTable.length >= length)
-    case false => copy(cardStack, tableStack, reverse, user.userCardStackHand.length + 3 >= length && cardStack.isEmpty() || user.userCardStackHand.length >= length)
+    case false => copy(cardStack, tableStack, reverse, user.userCardStackHand.length + 3 >= length && (!user.userCardStackTable.isEmpty) || user.userCardStackHand.length >= length)
   } else this
 
   def checkCardValue(user: User, firstElement: Card, topTableElement: Card): CardStack = if (valid) firstElement.rank.value match {

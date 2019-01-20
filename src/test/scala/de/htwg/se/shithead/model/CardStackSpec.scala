@@ -30,7 +30,7 @@ class CardStackSpec extends WordSpec with Matchers {
         cardStack = cardStack.addToTopTableStack(tuple._2)
         cardStack.tableStack.cardStack.length should be(1)
         cardStack.cardStack.cardStack.length should be(51)
-        cardStack.addToTopTableStack(List(card)).tableStack.cardStack should be(2)
+        cardStack.addToTopTableStack(List(card)).tableStack.cardStack.length should be(2)
       }
 
       "delete TableStack" in {
@@ -63,33 +63,37 @@ class CardStackSpec extends WordSpec with Matchers {
     "checklistlength and checkCardValue" should {
       var cardStack = new CardStack(getCards(true),new Stack(List(),false),false, true)
       "listlength with emptyhand be user cardstacktable length" in {
-        cardStack = cardStack.checkListLength(new User("Hans",List(card),List(card)),0)
+        cardStack = cardStack.checkListLength(new User("Hans",List(card),List(card)),1)
         cardStack.valid should be (true)
         cardStack = cardStack.checkListLength(new User("Hans",List(card),List(card)),1)
+        cardStack.valid should be(true)
+        cardStack = cardStack.checkListLength(new User("Hans",List(card),List(card)),2)
         cardStack.valid should be(false)
       }
 
       "listlength without emptyhand be user cardstacktable length" in {
-        cardStack = cardStack.checkListLength(new User("Hans",List(),List(card)),0)
-        cardStack.valid should be (true)
-        cardStack = cardStack.checkListLength(new User("Hans",List(),List(card)),1)
+        cardStack = cardStack.checkListLength(new User("Hans",List(),List(card)),4)
         cardStack.valid should be (false)
+        cardStack = cardStack.checkListLength(new User("Hans",List(),List(card)),1)
+        cardStack.valid should be (true)
+        cardStack = cardStack.checkListLength(new User("Hnas",List(card),List()),1)
+        cardStack.valid should be (true)
       }
 
       "cardValue with 10 2 and 3 always be true" in {
-        cardStack = cardStack.checkCardValue(new User("Hans",List(),List()),new Card(Two,Spade,true),new Card(King,Spade,true))
+        cardStack = cardStack.checkCardValue(new User("Hans",List(),List()),new Card(King,Spade,true),new Card(Two,Spade,true))
         cardStack.valid should be(true)
-        cardStack = cardStack.checkCardValue(new User("Hans",List(),List()),new Card(Three,Spade,true),new Card(King,Spade,true))
+        cardStack = cardStack.checkCardValue(new User("Hans",List(),List()),new Card(King,Spade,true),new Card(Three,Spade,true))
         cardStack.valid should be(true)
-        cardStack = cardStack.checkCardValue(new User("Hans",List(),List()),new Card(Ten,Spade,true),new Card(King,Spade,true))
+        cardStack = cardStack.checkCardValue(new User("Hans",List(),List()),new Card(King,Spade,true),new Card(Ten,Spade,true))
         cardStack.valid should be(true)
       }
 
       "cardValue with smaller then element,with bigger/same then element be " in {
         cardStack = cardStack.checkCardValue(new User("Hans",List(),List()),new Card(Jack,Spade,true),new Card(King,Spade,true))
-        cardStack.valid should be (false)
-        cardStack = cardStack.checkCardValue(new User("Hans",List(),List()),new Card(Ace,Spade,true),new Card(King,Spade,true))
         cardStack.valid should be (true)
+        cardStack = cardStack.checkCardValue(new User("Hans",List(),List()),new Card(Ace,Spade,true),new Card(King,Spade,true))
+        cardStack.valid should be (false)
         cardStack = cardStack.checkCardValue(new User("Hans",List(),List()),new Card(Seven,Spade,true),new Card(King,Spade,true))
         cardStack.valid should be (false)
         cardStack = cardStack.checkCardValue(new User("Hans",List(),List()),new Card(Seven,Spade,true),new Card(Five,Spade,true))
@@ -101,7 +105,6 @@ class CardStackSpec extends WordSpec with Matchers {
 
       "get Top table element" should {
         "give the top element of table " in {
-          cardStack.getTopTableElement() should be(new NoSuchElementException)
           cardStack.addToTopTableStack(card)
           cardStack.getTopTableElement() should be(card)
 

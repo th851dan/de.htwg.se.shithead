@@ -21,21 +21,23 @@ class Gui(controller: ControllerInterface) extends Frame {
     editable = false
   }
 
-  contents = new GridPanel(1, 2) {
+  contents = new GridPanel(1, 3) {
     val textCard = new ScrollPane(output) {
       border = Swing.EtchedBorder
       foreground = java.awt.Color.RED
     }
-    val currentUser = new Label("add users first") {
-      border = Swing.EtchedBorder
-    }
+    val currentUser = new Label("add users first") {}
     val playCardText = new FormattedTextField(NumberFormat.getIntegerInstance) {
       maximumSize = maxTextFieldSize
       border = Swing.EtchedBorder
     }
+    val lastPlayedCard = new Label("play card first") {
+    }
 
-    val buttons: GridPanel = new GridPanel(3, 1) {
-      border = emptyBorder
+
+
+    val buttons: GridPanel = new GridPanel(2, 1) {
+      border = Swing.TitledBorder(Swing.LineBorder(java.awt.Color.BLACK),"Buttons")
       var cards: List[Int] = List()
       val addCard = new Button("add card") {
         border = Swing.EtchedBorder
@@ -43,8 +45,6 @@ class Gui(controller: ControllerInterface) extends Frame {
       val playCard = new Button("play card(s)") {
         border = Swing.EtchedBorder
       }
-
-      contents += currentUser
 
       contents += new GridPanel(2, 2) {
         contents += addCard
@@ -62,7 +62,7 @@ class Gui(controller: ControllerInterface) extends Frame {
         playCard.reactions += {
           case ButtonClicked(playCard) => {
             if (!cards.isEmpty) {
-              controller.playCard(cards)
+              if(controller.playCard(cards)) lastPlayedCard.text = controller.getPlayedCard()
             } else output.text = output.text + "\nadd cards first"
           }
         }
@@ -72,18 +72,31 @@ class Gui(controller: ControllerInterface) extends Frame {
     }
 
     val text = new BoxPanel(Orientation.Vertical) {
-      border = emptyBorder
+      border = Swing.TitledBorder(Swing.LineBorder(java.awt.Color.BLACK),"output")
       contents += textCard
     }
+
     contents += buttons
+    contents += new GridPanel(2,1) {
+      border = Swing.TitledBorder(Swing.LineBorder(java.awt.Color.BLACK),"info")
+      contents += new BoxPanel(Orientation.Vertical) {
+        border = linedBorder
+        contents += new Label("Current user:")
+        contents += currentUser
+      }
+      contents += new BoxPanel(Orientation.Vertical) {
+        border = linedBorder
+        contents += new Label("Last played card:")
+        contents += lastPlayedCard
+      }
+    }
     contents += text
   }
 
   menuBar = new MenuBar {
     contents += new Menu("menu") {
-      border = Swing.LineBorder(java.awt.Color.BLACK)
       contents += new Menu("about") {
-        contents += new Label("written by Marius and the only FlipperyLipp")
+        contents += new Label("written by the only FlipperyLipp")
       }
       contents += new Separator()
       contents += new MenuItem(Action("exit") {
@@ -92,8 +105,6 @@ class Gui(controller: ControllerInterface) extends Frame {
     }
 
     contents += new Menu("Game") {
-      border = Swing.LineBorder(java.awt.Color.BLACK)
-
       contents += new MenuItem(Action("add user") {
         var r = Dialog.showInput(new BoxPanel(Orientation.Horizontal), "Enter user: ", initial = "")
         r match {
@@ -102,7 +113,7 @@ class Gui(controller: ControllerInterface) extends Frame {
         }
 
       })
-
+      contents += new Separator()
       contents += new MenuItem(Action("start game") {
         val card1 = new FormattedTextField(NumberFormat.getIntegerInstance)
         val card2 = new FormattedTextField(NumberFormat.getIntegerInstance)
@@ -126,29 +137,28 @@ class Gui(controller: ControllerInterface) extends Frame {
           }
         }
       })
-
+      contents += new Separator()
       contents += new MenuItem(Action("redo") {
         controller.redo()
       })
-
+      contents += new Separator()
       contents += new MenuItem(Action("undo") {
         controller.undo()
       })
     }
 
     contents += new Menu("file") {
-      border = Swing.LineBorder(java.awt.Color.BLACK)
       contents += new MenuItem(Action("load") {
         controller.load
       })
-
+      contents += new Separator()
       contents += new MenuItem(Action("save") {
         controller.save
       })
     }
   }
 
-  size = new Dimension(512, 512)
+  size = new Dimension(750, 400)
   visible = true
 
   def changeCards(): Unit = {
