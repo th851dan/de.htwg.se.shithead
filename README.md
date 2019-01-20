@@ -3,8 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/h3rzkasper/de.htwg.se.shithead/badge.svg?branch=master)](https://coveralls.io/github/h3rzkasper/de.htwg.se.shithead?branch=master)
 
 ## Shithead by Marius and the only Lipp
-![alt text](https://www.wikihow.com/Play-the-Palace-Card-Game#/Image:Play-the-Palace-Card-Game-Step-3-Version-2.jpg)
-[credits](https://creativecommons.org/licenses/by-nc-sa/3.0/)
+![alt text](https://i.ytimg.com/vi/RECsX0t0Wq0/maxresdefault.jpg)
 
 ## About
 Basic [Shithead](https://en.wikipedia.org/wiki/Shithead_(card_game)) card  game. Written with Scala using [VSC](https://code.visualstudio.com/) and [Intellij](https://www.jetbrains.com/idea/)
