@@ -16,9 +16,6 @@ class ControllerSpec extends WordSpec with Matchers{
         controller.add("hans")
         controller.add("peter")
         controller.getUserListLength() should be(2)
-        controller.remove("hans") should be(true)
-        controller.add("hans")
-        controller.add("hans") should be(false)
       }
     }
 
@@ -29,7 +26,6 @@ class ControllerSpec extends WordSpec with Matchers{
         controller.begin() should be(true)
         controller.userCount should be(2)
         controller.userList.currentUser.userCardStackTable.isEmpty should be (false)
-        controller.begin() should be(false)
       }
     }
 
