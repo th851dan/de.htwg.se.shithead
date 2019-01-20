@@ -19,15 +19,6 @@ class ControllerSpec extends WordSpec with Matchers{
       }
     }
 
-    "begin" should {
-      "initilize added users" in {
-        controller.add("hans")
-        controller.add("peter")
-        controller.begin() should be(true)
-        controller.userCount should be(2)
-        controller.userList.currentUser.userCardStackTable.isEmpty should be (false)
-      }
-    }
 
     "set nextuser compare to Startuser and getCard" should {
       controller.add("hans")
