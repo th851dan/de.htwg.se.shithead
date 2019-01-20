@@ -11,7 +11,7 @@ case class CardStack(cardStack: Stack, tableStack: Stack, reverse: Boolean, vali
 
   def addToTopCardStack(cardlist: List[Card]): CardStack = copy(cardStack.addToTop(cardlist), tableStack, reverse, valid)
 
-  def addToTopTableStack(card: Card): CardStack = copy(cardStack, tableStack, reverse, valid)
+  def addToTopTableStack(card: Card): CardStack = copy(cardStack, tableStack.addToTop(card), reverse, valid)
 
   def shuffleCardStack(): CardStack = copy(cardStack.shuffle(), tableStack, reverse, valid)
 

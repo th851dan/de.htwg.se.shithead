@@ -28,7 +28,7 @@ class ShitHeadModule extends AbstractModule with ScalaModule {
     if (b) {
       val suites = Set(Spade, Heart, Club, Diamond)
       val ranks = List(Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace)
-      new Stack(for (r <- ranks; s <- suites) yield Card(r, s, false), true)
+      new Stack(for (r <- ranks; s <- suites) yield Card(r, s, false), true).shuffle()
     } else new Stack(List(), false)
   }
 }
