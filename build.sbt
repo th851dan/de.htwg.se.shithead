@@ -21,7 +21,7 @@ enablePlugins(DockerPlugin)
 coverageEnabled := true
 coverageExcludedPackages := "de.htwg.se.shithead.view.gui.*;de.htwg.se.shithead.model.fileIoComponent.*;de.htwg.se.shithead.model.cardStackComponent.mockImp.*;
 de.htwg.se.shithead.model.stackComponent.mockImp.*;de.htwg.se.shithead.model.userListComponent.mockImp.*;de.htwg.se.shithead.controller.controllerBase.controllerMock.*;
-de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.commands.*;de.htwg.se.shithead.controller.Events.scala,de.htwg.se.shithead.controller.GameState.scala;"
+de.htwg.se.shithead.controller.controllerBase.controllerBaseIm.commands.*;de.htwg.se.shithead.controller.Events.scala;de.htwg.se.shithead.controller.GameState.scala;"
 
 dockerfile in docker := {
   val jarFile: File = sbt.Keys.`package`.in(Compile, packageBin).value
