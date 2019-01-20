@@ -1,0 +1,90 @@
+<game>
+    <cardStack reverse="false" valid="true">
+        <stackOnTable isValid="false"> </stackOnTable>
+        <stackAvailable isValid="true">
+            <card rank="Six" suite="Club" visibility="false"></card>
+            <card rank="Six" suite="Diamond" visibility="false"></card>
+            <card rank="Seven" suite="Spade" visibility="false"></card>
+            <card rank="Seven" suite="Heart" visibility="false"></card>
+            <card rank="Seven" suite="Club" visibility="false"></card>
+            <card rank="Seven" suite="Diamond" visibility="false"></card>
+            <card rank="Eight" suite="Spade" visibility="false"></card>
+            <card rank="Eight" suite="Heart" visibility="false"></card>
+            <card rank="Eight" suite="Club" visibility="false"></card>
+            <card rank="Eight" suite="Diamond" visibility="false"></card>
+            <card rank="Nine" suite="Spade" visibility="false"></card>
+            <card rank="Nine" suite="Heart" visibility="false"></card>
+            <card rank="Nine" suite="Club" visibility="false"></card>
+            <card rank="Nine" suite="Diamond" visibility="false"></card>
+            <card rank="Ten" suite="Spade" visibility="false"></card>
+            <card rank="Ten" suite="Heart" visibility="false"></card>
+            <card rank="Ten" suite="Club" visibility="false"></card>
+            <card rank="Ten" suite="Diamond" visibility="false"></card>
+            <card rank="Jack" suite="Spade" visibility="false"></card>
+            <card rank="Jack" suite="Heart" visibility="false"></card>
+            <card rank="Jack" suite="Club" visibility="false"></card>
+            <card rank="Jack" suite="Diamond" visibility="false"></card>
+            <card rank="Queen" suite="Spade" visibility="false"></card>
+            <card rank="Queen" suite="Heart" visibility="false"></card>
+            <card rank="Queen" suite="Club" visibility="false"></card>
+            <card rank="Queen" suite="Diamond" visibility="false"></card>
+            <card rank="King" suite="Spade" visibility="false"></card>
+            <card rank="King" suite="Heart" visibility="false"></card>
+            <card rank="King" suite="Club" visibility="false"></card>
+            <card rank="King" suite="Diamond" visibility="false"></card>
+            <card rank="Ace" suite="Spade" visibility="false"></card>
+            <card rank="Ace" suite="Heart" visibility="false"></card>
+            <card rank="Ace" suite="Club" visibility="false"></card>
+            <card rank="Ace" suite="Diamond" visibility="false"></card>
+        </stackAvailable>
+    </cardStack>
+    <list>
+        <current name="peter">
+            <tableStack>
+                <card rank="Two" suite="Spade" visibility="false"></card>
+                <card rank="Two" suite="Heart" visibility="true"></card>
+                <card rank="Two" suite="Diamond" visibility="false"></card>
+                <card rank="Three" suite="Spade" visibility="true"></card>
+                <card rank="Three" suite="Club" visibility="false"></card>
+                <card rank="Three" suite="Diamond" visibility="true"></card>
+            </tableStack>
+            <handStack>
+                <card rank="Two" suite="Club" visibility="true"></card>
+                <card rank="Three" suite="Heart" visibility="true"></card>
+                <card rank="Four" suite="Spade" visibility="true"></card>
+            </handStack>
+        </current>
+        <users>
+            <user name="peter">
+                <tableStack>
+                    <card rank="Two" suite="Spade" visibility="false"></card>
+                    <card rank="Two" suite="Heart" visibility="true"></card>
+                    <card rank="Two" suite="Diamond" visibility="false"></card>
+                    <card rank="Three" suite="Spade" visibility="true"></card>
+                    <card rank="Three" suite="Club" visibility="false"></card>
+                    <card rank="Three" suite="Diamond" visibility="true"></card>
+                </tableStack>
+                <handStack>
+                    <card rank="Two" suite="Club" visibility="true"></card>
+                    <card rank="Three" suite="Heart" visibility="true"></card>
+                    <card rank="Four" suite="Spade" visibility="true"></card>
+                </handStack>
+            </user>
+            <user name="hans">
+                <tableStack>
+                    <card rank="Four" suite="Heart" visibility="false"></card>
+                    <card rank="Four" suite="Club" visibility="true"></card>
+                    <card rank="Five" suite="Spade" visibility="false"></card>
+                    <card rank="Five" suite="Heart" visibility="true"></card>
+                    <card rank="Five" suite="Diamond" visibility="false"></card>
+                    <card rank="Six" suite="Spade" visibility="true"></card>
+                </tableStack>
+                <handStack>
+                    <card rank="Four" suite="Diamond" visibility="true"></card>
+                    <card rank="Five" suite="Club" visibility="true"></card>
+                    <card rank="Six" suite="Heart" visibility="true"></card>
+                </handStack>
+            </user>
+        </users>
+    </list>
+</game>
