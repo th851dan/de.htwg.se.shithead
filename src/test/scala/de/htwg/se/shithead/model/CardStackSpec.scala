@@ -43,7 +43,7 @@ class CardStackSpec extends WordSpec with Matchers {
       }
 
       "add to cardstack with addToTopCardStack" in {
-        var cardStack = new CardStack(getCards(true),new Stack(List(),false),false, true)
+        var cardStack = new CardStack(getCards(false),new Stack(List(),false),false, true)
         cardStack = cardStack.addToTopCardStack(card)
         cardStack = cardStack.addToTopCardStack(List(card))
         cardStack.cardStack.cardStack.length should be(54)
@@ -76,7 +76,7 @@ class CardStackSpec extends WordSpec with Matchers {
         cardStack.valid should be (false)
         cardStack = cardStack.checkListLength(new User("Hans",List(),List(card)),1)
         cardStack.valid should be (true)
-        cardStack = cardStack.checkListLength(new User("Hnas",List(card),List()),1)
+        cardStack = cardStack.checkListLength(new User("Hans",List(card),List()),1)
         cardStack.valid should be (true)
       }
 
@@ -91,21 +91,20 @@ class CardStackSpec extends WordSpec with Matchers {
 
       "cardValue with smaller then element,with bigger/same then element be " in {
         cardStack = cardStack.checkCardValue(new User("Hans",List(),List()),new Card(Jack,Spade,true),new Card(King,Spade,true))
-        cardStack.valid should be (true)
+        cardStack.valid should be (false)
         cardStack = cardStack.checkCardValue(new User("Hans",List(),List()),new Card(Ace,Spade,true),new Card(King,Spade,true))
-        cardStack.valid should be (false)
+        cardStack.valid should be (true)
         cardStack = cardStack.checkCardValue(new User("Hans",List(),List()),new Card(Seven,Spade,true),new Card(King,Spade,true))
-        cardStack.valid should be (false)
+        cardStack.valid should be (true)
         cardStack = cardStack.checkCardValue(new User("Hans",List(),List()),new Card(Seven,Spade,true),new Card(Five,Spade,true))
         cardStack.valid should be(true)
         cardStack.reverse should be(true)
-
 
       }
 
       "get Top table element" should {
         "give the top element of table " in {
-          cardStack.addToTopTableStack(card)
+          cardStack = cardStack.addToTopTableStack(card)
           cardStack.getTopTableElement() should be(card)
 
         }
@@ -151,10 +150,8 @@ class CardStackSpec extends WordSpec with Matchers {
   }
 
   def getCards(b: Boolean): Stack = {
-    if (b) {
       val suites = Set(Spade, Heart, Club, Diamond)
       val ranks = List(Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace)
-      new Stack(for (r <- ranks; s <- suites) yield Card(r, s, false), true)
-    } else new Stack(List(), false)
+      new Stack(for (r <- ranks; s <- suites) yield Card(r, s, b), b)
   }
 }

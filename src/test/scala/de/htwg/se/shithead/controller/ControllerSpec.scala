@@ -12,10 +12,9 @@ class ControllerSpec extends WordSpec with Matchers{
     val controller = inj.getInstance(classOf[Controller])
 
     "add and remove " should {
-      controller.add("hans")
-      controller.add("peter")
-
       "add users and remove from/to controller.userlist" in {
+        controller.add("hans")
+        controller.add("peter")
         controller.getUserListLength() should be(2)
         controller.remove("hans") should be(true)
         controller.add("hans")
@@ -24,9 +23,9 @@ class ControllerSpec extends WordSpec with Matchers{
     }
 
     "begin" should {
-      controller.add("hans")
-      controller.add("peter")
       "initilize added users" in {
+        controller.add("hans")
+        controller.add("peter")
         controller.begin() should be(true)
         controller.userCount should be(2)
         controller.userList.currentUser.userCardStackTable.isEmpty should be (false)
@@ -49,14 +48,14 @@ class ControllerSpec extends WordSpec with Matchers{
     }
 
     "change cards" should {
-      controller.add("hans")
-      controller.add("peter")
-      controller.begin()
       "change cards of user from hand to table both ways" in {
-        controller.changeCards(0,0 ) should be(true)
+        controller.add("hans")
+        controller.add("peter")
+        controller.begin()
+        controller.changeCards(1,1) should be(true)
         controller.changeCards(10,10) should be(false)
         controller.status = FINISHED
-        controller.changeCards(0,0) should be(false)
+        controller.changeCards(1,1) should be(false)
       }
     }
 

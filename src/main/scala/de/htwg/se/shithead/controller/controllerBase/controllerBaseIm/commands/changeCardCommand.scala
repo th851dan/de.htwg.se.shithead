@@ -16,7 +16,7 @@ class changeCardCommand(card1: Int, card2: Int,controller: ControllerInterface)e
   override def doStep(): Unit = {
     uL = controller.userList
     state = controller.status
-    changed = card1 >= 0 || card1 <= 2 || card2 >= 0 || card2 <= 2
+    changed = !(card1 < 0 || card1 > 2 || card2 < 0 || card2 > 2)
     controller.userList = controller.userList.switchCards(card1,card2)
   }
 
