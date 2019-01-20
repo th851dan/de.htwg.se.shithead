@@ -55,9 +55,6 @@ class ControllerSpec extends WordSpec with Matchers{
         (controller.buildAll(true).length > controller.build(true).length) should be(true)
         controller.getCurrentUserName() should be(controller.userList.currentUser.NAME)
         controller.getPlayedCard() should be("")
-        controller.status = DURINGGAME
-        controller.playCard(List(0))
-        controller.getPlayedCard().isEmpty should be(false)
       }
     }
   }
