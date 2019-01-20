@@ -50,7 +50,7 @@ case class UserList(userList: List[User], currentUser: User) extends UserListInt
 
   def userListLength(): Int = userList.length
 
-  def switchCards(c1: Int, c2: Int): UserList = if (c1 <= 2 || c1 >= 0 || c2 <= 2 || c2 >= 0) {
+  def switchCards(c1: Int, c2: Int): UserList = if (!(c1 > 2 || c1 < 0 || c2 > 2 || c2 < 0)) {
     var user: User = currentUser
     val cardH = currentUser.userCardStackHand(c1)
     val cardT = getTrueTableCard(currentUser, c2)
