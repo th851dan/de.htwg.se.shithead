@@ -8,6 +8,7 @@ import de.htwg.se.shithead.controller.GameState._
 
 class ControllerSpec extends WordSpec with Matchers{
   "In controller" when {
+    
     var inj = Guice.createInjector(new ShitHeadModule)
     val controller = inj.getInstance(classOf[Controller])
 
